@@ -1,7 +1,7 @@
 // @ts-check
 
 const config = {
-    endpoint: "https://cosmos-stage-gianni-serverless.documents.azure.com:443/",
+    endpoint: #endpoint,
     key: #primarykey,
     databaseId: "stage-gianni-cosmos",
     containerId: "Users",
