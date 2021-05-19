@@ -1721,8 +1721,8 @@ var aantalklantengevonden;
 
                     //wanneer er op de reminder versturen gedrukt word
                     $('#reminder').click(async function () {
-                        const accountSid = "ACe9b7173be0c8baeee3c96e0bbc5ae302";
-                        const authToken = "7fd916239574d31f7874462310ed9c9c";
+                        const accountSid = #sid;
+                    const authToken = #authtoken;
                         const client = require('twilio')(accountSid, authToken);
                         //maak een berichti aan met de tekst, telefoonnummer van twilio en to een gsmnummer, in dit geval de telefoonnummer van de klant
                         client.messages
@@ -2059,8 +2059,8 @@ var aantalklantengevonden;
                 });
                 //wanneer er op de reminder knop gedrukt word
                 $('#reminder').click(async function () {
-                    const accountSid = "ACe9b7173be0c8baeee3c96e0bbc5ae302";
-                    const authToken = "7fd916239574d31f7874462310ed9c9c";
+                    const accountSid = #sid;
+                    const authToken = #authtoken;
                     const client = require('twilio')(accountSid, authToken);
 
                     //maak een bericht aan met de volgende tekst, van het twilio nummer, naar de klant zijn gsm nummer, daarna toon een notificatie
