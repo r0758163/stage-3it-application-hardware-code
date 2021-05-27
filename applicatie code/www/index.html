@@ -1,32 +1,36 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-<!--    <meta name="viewport"-->
-<!--          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">-->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"/>
+    <!--    <meta name="viewport"-->
+    <!--          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
     <link rel="stylesheet" href="./css/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
     <title>Gps trackers</title>
     <!--    <script type="text/javascript" src="./js/bundle.js"></script>-->
     <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript"
-            src="//maps.googleapis.com/maps/api/js?key=AIzaSyB6iQ-nhNzV22S9NtLIv54ExBVsvrsNU9g"></script>
+    <!--    key toevoegen-->
+    <script type="text/javascript" src="//maps.googleapis.com/maps/api/js?key="></script>
     <script src="https://cdnjs.cloudflare.com/npm/underscore@latest/underscore-umd-min.js"></script>
 
     <style type="text/css">
-        #map_canvas { /* Must bigger size than 100x100 pixels */
+        #map_canvas {
+            /* Must bigger size than 100x100 pixels */
             width: 100%;
             height: 400px;
         }
-        .body{
-            background: rgb(127,189,163) !important;
-            background: linear-gradient(180deg, rgba(127,189,163,1) 70%, rgba(9,85,64,1) 100%) !important;
+
+        .body {
+            background: rgb(127, 189, 163) !important;
+            background: linear-gradient(180deg, rgba(127, 189, 163, 1) 70%, rgba(9, 85, 64, 1) 100%) !important;
         }
-        body{
-            background: rgb(127,189,163) !important;
-            background: linear-gradient(180deg, rgba(127,189,163,1) 70%, rgba(9,85,64,1) 100%) !important;
+
+        body {
+            background: rgb(127, 189, 163) !important;
+            background: linear-gradient(180deg, rgba(127, 189, 163, 1) 70%, rgba(9, 85, 64, 1) 100%) !important;
         }
 
 
@@ -52,165 +56,167 @@
         #tabInstelligen {
             display: block;
         }
+
     </style>
 </head>
+
 <body class="body">
-<div class="navbar-fixed">
-    <nav class="navkleur darken-3">
-        <div class="nav-wrapper container">
-            <a href="#!" class="brand-logo center" id="teksttitle2">Stage</a>
-            <a href="#!" data-target="nav-mobile" class="sidenav-trigger show-on-large">
-                <i class="material-icons">menu</i>
-            </a>
-        </div>
-    </nav>
-</div>
-<!-- Fixed sideNav -->
-<ul id="nav-mobile" class="sidenav">
-    <li><a href="#!" data-title="Info" data-show="tabIntro"><i class="material-icons">info</i>Info</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a href="#dashboard" data-title="Dashboard" id="dashboardclick" data-show="tabTutorial"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a href="#!" data-title="Klant" data-show="tabmakeklant"><i class="material-icons">add</i>klant aanmaken</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a href="#!" data-title="Zoeken" data-show="tabBeneden"><i class="material-icons">search</i>klant zoeken</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a href="#!" data-title="User" data-show="tabmakeuser"><i class="material-icons">account_circle</i>Gebruiker aanmaken</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-    <li><a href="#!" data-title="Users" id="users" data-show="tabshowuser"><i class="material-icons">contacts</i>Users</a></li>
-    <li>
-        <div class="divider"></div>
-    </li>
-
-    <li><a href="#login" id="logout" data-title="Login" data-show="tabInstelligen"><i class="material-icons">cancel</i>Logout</a></li>
-</ul>
-<!-- Grid -->
-<div class="container">
-    <div class="row spa" id="tabshowuser">
-        <div>
-            <ul class="collection" id collection>
-            </ul>
-        </div>
+    <div class="navbar-fixed">
+        <nav class="navkleur darken-3">
+            <div class="nav-wrapper container">
+                <a href="#!" class="brand-logo center" id="teksttitle2">Stage</a>
+                <a href="#!" data-target="nav-mobile" class="sidenav-trigger show-on-large">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+        </nav>
     </div>
-    <div class="row spa" id="tabmakeuser">
+    <!-- Fixed sideNav -->
+    <ul id="nav-mobile" class="sidenav">
+        <li><a href="#!" data-title="Info" data-show="tabIntro"><i class="material-icons">info</i>Info</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="#dashboard" data-title="Dashboard" id="dashboardclick" data-show="tabTutorial"><i class="material-icons">dashboard</i>Dashboard</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="#!" data-title="Klant" data-show="tabmakeklant"><i class="material-icons">add</i>klant aanmaken</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="#!" data-title="Zoeken" data-show="tabBeneden"><i class="material-icons">search</i>klant zoeken</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="#!" data-title="User" data-show="tabmakeuser"><i class="material-icons">account_circle</i>Gebruiker aanmaken</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
+        <li><a href="#!" data-title="Users" id="users" data-show="tabshowuser"><i class="material-icons">contacts</i>Users</a></li>
+        <li>
+            <div class="divider"></div>
+        </li>
 
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" type="text" id="usernaamuser" placeholder="Usernaam*" name="usernaamuser">
+        <li><a href="#login" id="logout" data-title="Login" data-show="tabInstelligen"><i class="material-icons">cancel</i>Logout</a></li>
+    </ul>
+    <!-- Grid -->
+    <div class="container">
+        <div class="row spa" id="tabshowuser">
+            <div>
+                <ul class="collection" id collection>
+                </ul>
+            </div>
         </div>
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" type="text" id="naamuser" placeholder="Naam*" name="naamuser">
-        </div>
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" text="text" id="familienaamuser" placeholder="familienaam*" name="familienaamuser">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" type="password" id="passworduser" placeholder="Password*" name="passworduser" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" type="password" id="passworduserconfirm" placeholder="Repeat password*" name="passworduserconfirm" autocomplete="off">
-        </div>
-        <div class="center">
-            <button id="submitbuttonusermaken" class="buttonclass" type="submit">User aanmaken</button>
-        </div>
-    </div>
-    <div class="row spa" id="tabmakeklant">
+        <div class="row spa" id="tabmakeuser">
 
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" type="text" id="naam2" placeholder="Naam*" name="naam">
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" type="text" id="usernaamuser" placeholder="Usernaam*" name="usernaamuser">
+            </div>
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" type="text" id="naamuser" placeholder="Naam*" name="naamuser">
+            </div>
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" text="text" id="familienaamuser" placeholder="familienaam*" name="familienaamuser">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" type="password" id="passworduser" placeholder="Password*" name="passworduser" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" type="password" id="passworduserconfirm" placeholder="Repeat password*" name="passworduserconfirm" autocomplete="off">
+            </div>
+            <div class="center">
+                <button id="submitbuttonusermaken" class="buttonclass" type="submit">User aanmaken</button>
+            </div>
         </div>
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" text="text" id="familienaam2" placeholder="Familienaam*" name="familienaam">
-        </div>
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" text="text" id="land2" placeholder="Land*" name="land" list="landen">
-            <datalist id="landen">
-                <option value="Albanië"></option>
-                <option value="Andorra"></option>
-                <option value="Armenië"></option>
-                <option value="Azerbeidzjan"></option>
-                <option value="België"></option>
-                <option value="Bosnië en Herzegovina"></option>
-                <option value="Bulgarije"></option>
-                <option value="Cyprus"></option>
-                <option value="Denemarken"></option>
-                <option value="Duitsland"></option>
-                <option value="Estland"></option>
-                <option value="Finland"></option>
-                <option value="Frankrijk"></option>
-                <option value="Georgië"></option>
-                <option value="Griekenland"></option>
-                <option value="Hongarije"></option>
-                <option value="Ierland"></option>
-                <option value="IJsland"></option>
-                <option value="Italië"></option>
-                <option value="Kazachstan"></option>
-                <option value="Kosovo"></option>
-                <option value="Kroatië"></option>
-                <option value="Letland"></option>
-                <option value="Lichtenstein"></option>
-                <option value="Litouwen"></option>
-                <option value="Luxemburg"></option>
-                <option value="Malta"></option>
-                <option value="Moldavië"></option>
-                <option value="Monaco"></option>
-                <option value="Nederland"></option>
-                <option value="Noord-Macedonië"></option>
-                <option value="Noorwegen"></option>
-                <option value="Oekraïne"></option>
-                <option value="Oostenrijk"></option>
-                <option value="Polen"></option>
-                <option value="Portugal"></option>
-                <option value="Roemenië"></option>
-                <option value="Rusland"></option>
-                <option value="San Marino"></option>
-                <option value="Servië"></option>
-                <option value="Slovenië"></option>
-                <option value="Slowakije"></option>
-                <option value="Spanje"></option>
-                <option value="Tsjechië"></option>
-                <option value="Turkije"></option>
-                <option value="Vaticaanstad"></option>
-                <option value="Verenigd Koninkrijk"></option>
-                <option value="Wit-Rusland"></option>
-                <option value="Zweden"></option>
-                <option value="Zwitserland"></option>
-            </datalist>
-        </div>
-        <div class="borders loginclass2">
-            <input autocomplete="off" class="inputtype" text="text" id="gemeente2" placeholder="Gemeente*" name="gemeente">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="postcode2" placeholder="Postcode*" name="postcode" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="straat2" placeholder="Straat*" name="straat" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="huisnummer2" placeholder="Huisnummer*" name="huisnummer" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="gsm" placeholder="GSM-nummer*" name="gsm" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" type="text" id="frames2" placeholder='Frames 1,2,3' name="frames2" autocomplete="off">
-        </div>
-        <div class="center">
-            <button id="submitbuttonklantmaken" class="buttonclass" type="submit">Klant aanmaken</button>
-        </div>
+        <div class="row spa" id="tabmakeklant">
+
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" type="text" id="naam2" placeholder="Naam*" name="naam">
+            </div>
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" text="text" id="familienaam2" placeholder="Familienaam*" name="familienaam">
+            </div>
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" text="text" id="land2" placeholder="Land*" name="land" list="landen">
+                <datalist id="landen">
+                    <option value="Albanië"></option>
+                    <option value="Andorra"></option>
+                    <option value="Armenië"></option>
+                    <option value="Azerbeidzjan"></option>
+                    <option value="België"></option>
+                    <option value="Bosnië en Herzegovina"></option>
+                    <option value="Bulgarije"></option>
+                    <option value="Cyprus"></option>
+                    <option value="Denemarken"></option>
+                    <option value="Duitsland"></option>
+                    <option value="Estland"></option>
+                    <option value="Finland"></option>
+                    <option value="Frankrijk"></option>
+                    <option value="Georgië"></option>
+                    <option value="Griekenland"></option>
+                    <option value="Hongarije"></option>
+                    <option value="Ierland"></option>
+                    <option value="IJsland"></option>
+                    <option value="Italië"></option>
+                    <option value="Kazachstan"></option>
+                    <option value="Kosovo"></option>
+                    <option value="Kroatië"></option>
+                    <option value="Letland"></option>
+                    <option value="Lichtenstein"></option>
+                    <option value="Litouwen"></option>
+                    <option value="Luxemburg"></option>
+                    <option value="Malta"></option>
+                    <option value="Moldavië"></option>
+                    <option value="Monaco"></option>
+                    <option value="Nederland"></option>
+                    <option value="Noord-Macedonië"></option>
+                    <option value="Noorwegen"></option>
+                    <option value="Oekraïne"></option>
+                    <option value="Oostenrijk"></option>
+                    <option value="Polen"></option>
+                    <option value="Portugal"></option>
+                    <option value="Roemenië"></option>
+                    <option value="Rusland"></option>
+                    <option value="San Marino"></option>
+                    <option value="Servië"></option>
+                    <option value="Slovenië"></option>
+                    <option value="Slowakije"></option>
+                    <option value="Spanje"></option>
+                    <option value="Tsjechië"></option>
+                    <option value="Turkije"></option>
+                    <option value="Vaticaanstad"></option>
+                    <option value="Verenigd Koninkrijk"></option>
+                    <option value="Wit-Rusland"></option>
+                    <option value="Zweden"></option>
+                    <option value="Zwitserland"></option>
+                </datalist>
+            </div>
+            <div class="borders loginclass2">
+                <input autocomplete="off" class="inputtype" text="text" id="gemeente2" placeholder="Gemeente*" name="gemeente">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="postcode2" placeholder="Postcode*" name="postcode" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="straat2" placeholder="Straat*" name="straat" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="huisnummer2" placeholder="Huisnummer*" name="huisnummer" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="gsm" placeholder="GSM-nummer*" name="gsm" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" type="text" id="frames2" placeholder='Frames 1,2,3' name="frames2" autocomplete="off">
+            </div>
+            <div class="center">
+                <button id="submitbuttonklantmaken" class="buttonclass" type="submit">Klant aanmaken</button>
+            </div>
 
 
-    </div>
-    <div class="row spa" id="tabBoven">
+        </div>
+        <div class="row spa" id="tabBoven">
             <div class="row">
                 <div class="col s4">
                     <p>Naam:</p>
@@ -243,31 +249,40 @@
                     <p id="dataklantenland"></p>
                 </div>
             </div>
-        <div class="row adres">
-            <div class="col s4">
-                <p>Adres:</p>
+            <div class="row adres">
+                <div class="col s4">
+                    <p>Adres:</p>
+                </div>
+                <div class="col s5">
+                    <p id="dataklantenadres"></p>
+                </div>
+                <div class="col s3 nobuttonclass center">
+                    <button id="editadres"><i class="material-icons circle blue">edit</i></button>
+                </div>
             </div>
-            <div class="col s5">
-                <p id="dataklantenadres"></p>
+            <div class="row buttons">
+                <div class="col s1"></div>
+                <div class="col s2"><button class="buttonclass2" id="editstraat">S</button></div>
+                <div class="col s2"><button class="buttonclass2" id="edithuisnummer">H</button></div>
+                <div class="col s2"><button class="buttonclass2" id="editpostcode">P</button></div>
+                <div class="col s2"><button class="buttonclass2" id="editgemeente">G</button></div>
+                <div class="col s2"><button class="buttonclass2" id="editland">L</button></div>
+                <div class="col s1"></div>
             </div>
-            <div class="col s3 nobuttonclass center">
-                <button id="editadres"><i class="material-icons circle blue">edit</i></button>
+            <div class="row gsm">
+                <div class="col s4 gsm">
+                    <p>Gsm nummer:</p>
+                </div>
+                <div class="col s5 gsm">
+                    <p id="dataklantengsm"></p>
+                </div>
+                <div class="col s3 nobuttonclass center">
+                    <button id="editgsm"><i class="material-icons circle blue">edit</i></button>
+                </div>
             </div>
-        </div>
-        <div class="row gsm">
-            <div class="col s4 gsm">
-                <p>Gsm nummer:</p>
+            <div class="row center">
+                <button class="buttonclass" id="reminder">Reminder sturen!</button>
             </div>
-            <div class="col s5 gsm">
-                <p id="dataklantengsm"></p>
-            </div>
-            <div class="col s3 nobuttonclass center">
-                <button id="editgsm"><i class="material-icons circle blue">edit</i></button>
-            </div>
-        </div>
-        <div class="row center">
-            <button class="buttonclass" id="reminder">Reminder sturen!</button>
-        </div>
 
             <div class="row">
                 <div class="col s4">
@@ -277,243 +292,242 @@
                     <p id="dataklantenframes"></p>
                 </div>
             </div>
-        <div class="row" id="0frames">
-            <div class="row" id="1frames">
-                <div class="col s1">
+            <div class="row" id="0frames">
+                <div class="row" id="1frames">
+                    <div class="col s1">
 
-                </div>
-                <div class="col s3">
-                    <p>Frameid1:</p>
-                </div>
-                <div class="col s8">
-                    <p id="dataklantenframesid1"></p>
-                </div>
-            </div>
-            <div class="row" id="2frames">
-                <div class="col s1">
-
-                </div>
-                <div class="col s3">
-                    <p>Frameid2:</p>
-                </div>
-                <div class="col s8">
-                    <p id="dataklantenframesid2"></p>
-                </div>
-            </div>
-            <div class="row" id="3frames">
-                <div class="col s1">
-
-                </div>
-                <div class="col s3">
-                    <p>Frameid3:</p>
-                </div>
-                <div class="col s8">
-                    <p id="dataklantenframesid3"></p>
-                </div>
-            </div>
-            <div class="row" id="4frames">
-                <div class="col s1">
-
-                </div>
-                <div class="col s3">
-                    <p>Frameid4:</p>
-                </div>
-                <div class="col s8">
-                    <p id="dataklantenframesid4"></p>
-                </div>
-            </div>
-            <div class="row" id="5frames">
-                <div class="col s1">
-
-                </div>
-                <div class="col s3">
-                    <p>Frameid5:</p>
-                </div>
-                <div class="col s8">
-                    <p id="dataklantenframesid5"></p>
-                </div>
-            </div>
-
-            <div class="center">
-                <div id="framestonen">
-
-                </div>
-
-            </div>
-        </div>
-        <div>
-            <hr>
-            <div class="row">
-                <div class="col s1">
-
-                </div>
-                <div class="col s8 loginclass2">
-                    <input class="inputtype" text="text" id="frametoevoegen" placeholder="Frame's aanpassen" name="frameid" autocomplete="off">
-                </div>
-                <div class="col s3 center">
-                    <button id="submitbuttoneditframes" type="submit">+</button>
-                </div>
-            </div>
-            <div id="errors">
-
-            </div>
-            <div id="klanterrors"></div>
-        </div>
-
-    </div>
-
-
-    <div class="row spa" id="tabIntro">
-        <p class="tekst">Op deze applicatie kun je de gegevens terug vinden van elke klant alsook de coördinaten van de gps trackers. Je kunt zoeken op de gegevens van de klant of op de frameid van de gps tracker.</p>
-        <p class="tekst">Deze applicatie is speciaal ontworpen voor <a href="https://www.coeck.be/nl-be">Coeck nv</a>.</p>
-        <p class="tekst">Gemaakt door <a href="https://www.3-it.be/">3it bvba</a>.</p>
-        <a href="https://www.coeck.be/nl-be"><img class="image" src="./images/logo-coeck.png" alt="logo coeck nv"></a>
-    </div>
-    <div class="row spa" id="tabBeneden">
-        <div class="borders loginclass2">
-            <input class="inputtype" type="text" id="klantenid" placeholder="Klantenid" name="klantenid" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-        <input class="inputtype" type="text" id="naam" placeholder="Naam" name="naam" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="familienaam" placeholder="Familienaam" name="familienaam" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="land" placeholder="Land" name="land" autocomplete="off" list="landen2">
-            <datalist id="landen2">
-                <option value="Albanië"></option>
-                <option value="Andorra"></option>
-                <option value="Armenië"></option>
-                <option value="Azerbeidzjan"></option>
-                <option value="België"></option>
-                <option value="Bosnië en Herzegovina"></option>
-                <option value="Bulgarije"></option>
-                <option value="Cyprus"></option>
-                <option value="Denemarken"></option>
-                <option value="Duitsland"></option>
-                <option value="Estland"></option>
-                <option value="Finland"></option>
-                <option value="Frankrijk"></option>
-                <option value="Georgië"></option>
-                <option value="Griekenland"></option>
-                <option value="Hongarije"></option>
-                <option value="Ierland"></option>
-                <option value="IJsland"></option>
-                <option value="Italië"></option>
-                <option value="Kazachstan"></option>
-                <option value="Kosovo"></option>
-                <option value="Kroatië"></option>
-                <option value="Letland"></option>
-                <option value="Lichtenstein"></option>
-                <option value="Litouwen"></option>
-                <option value="Luxemburg"></option>
-                <option value="Malta"></option>
-                <option value="Moldavië"></option>
-                <option value="Monaco"></option>
-                <option value="Nederland"></option>
-                <option value="Noord-Macedonië"></option>
-                <option value="Noorwegen"></option>
-                <option value="Oekraïne"></option>
-                <option value="Oostenrijk"></option>
-                <option value="Polen"></option>
-                <option value="Portugal"></option>
-                <option value="Roemenië"></option>
-                <option value="Rusland"></option>
-                <option value="San Marino"></option>
-                <option value="Servië"></option>
-                <option value="Slovenië"></option>
-                <option value="Slowakije"></option>
-                <option value="Spanje"></option>
-                <option value="Tsjechië"></option>
-                <option value="Turkije"></option>
-                <option value="Vaticaanstad"></option>
-                <option value="Verenigd Koninkrijk"></option>
-                <option value="Wit-Rusland"></option>
-                <option value="Zweden"></option>
-                <option value="Zwitserland"></option>
-            </datalist>
-
-
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="gemeente" placeholder="Gemeente" name="gemeente" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="postcode" placeholder="Postcode" name="postcode" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="straat" placeholder="Straat" name="straat" autocomplete="off">
-        </div>
-        <div class="borders loginclass2">
-            <input class="inputtype" text="text" id="huisnummer" placeholder="Huisnummer" name="huisnummer" autocomplete="off">
-        </div>
-        <div class="center">
-            <button id="submitbutton2" type="submit">Klant zoeken</button>
-        </div>
-        <div class="center paddingtop" id="searchtest">
-
-        </div>
-    </div>
-
-
-    <div class="row spa" id="tabInstelligen">
-        <div class="col s12 margin">
-            <div class="row">
-                <div class="col s12 center mtop">
-                    <img class="coecknv" src="./images/logo-coeck.png" alt="logo coeck">
-                    <!--                        <form action="#">-->
-                    <div class="formclass">
-                        <div class="loginclass">
-                                <input class="inputtype" type="text" id="username" placeholder="Username"
-                                       name="username" autocomplete="off">
-                        </div>
-                        <div class="loginclass">
-                                <input class="inputtype" type="password" id="password" placeholder="Password"
-                                       name="password">
-                        </div>
-                    <div class="center">
-                        <button id="submitbutton" type="submit">Login now!</button>
                     </div>
+                    <div class="col s3">
+                        <p>Frameid1:</p>
                     </div>
-                    <div id="test">
+                    <div class="col s8">
+                        <p id="dataklantenframesid1"></p>
                     </div>
                 </div>
+                <div class="row" id="2frames">
+                    <div class="col s1">
+
+                    </div>
+                    <div class="col s3">
+                        <p>Frameid2:</p>
+                    </div>
+                    <div class="col s8">
+                        <p id="dataklantenframesid2"></p>
+                    </div>
+                </div>
+                <div class="row" id="3frames">
+                    <div class="col s1">
+
+                    </div>
+                    <div class="col s3">
+                        <p>Frameid3:</p>
+                    </div>
+                    <div class="col s8">
+                        <p id="dataklantenframesid3"></p>
+                    </div>
+                </div>
+                <div class="row" id="4frames">
+                    <div class="col s1">
+
+                    </div>
+                    <div class="col s3">
+                        <p>Frameid4:</p>
+                    </div>
+                    <div class="col s8">
+                        <p id="dataklantenframesid4"></p>
+                    </div>
+                </div>
+                <div class="row" id="5frames">
+                    <div class="col s1">
+
+                    </div>
+                    <div class="col s3">
+                        <p>Frameid5:</p>
+                    </div>
+                    <div class="col s8">
+                        <p id="dataklantenframesid5"></p>
+                    </div>
+                </div>
+
+                <div class="center">
+                    <div id="framestonen">
+
+                    </div>
+
+                </div>
             </div>
+            <div>
+                <hr>
+                <div class="row">
+                    <div class="col s1">
+
+                    </div>
+                    <div class="col s8 loginclass2">
+                        <input class="inputtype" text="text" id="frametoevoegen" placeholder="Frame's aanpassen" name="frameid" autocomplete="off">
+                    </div>
+                    <div class="col s3 center">
+                        <button id="submitbuttoneditframes" type="submit">+</button>
+                    </div>
+                </div>
+                <div id="errors">
+
+                </div>
+                <div id="klanterrors"></div>
+            </div>
+
         </div>
-    </div>
-    <div class="row spa" id="tabTutorial">
-        <div class="col s12 lo">
-            <div id="map_canvas" class="map">
-                <button id="button">Toon alle frames!</button>
-                <button id="button4">Markers verwijderen!</button>
+
+
+        <div class="row spa" id="tabIntro">
+            <p class="tekst">Op deze applicatie kun je de gegevens terug vinden van elke klant alsook de coördinaten van de gps trackers. Je kunt zoeken op de gegevens van de klant of op de frameid van de gps tracker.</p>
+            <p class="tekst">Deze applicatie is speciaal ontworpen voor <a href="https://www.coeck.be/nl-be">Coeck nv</a>.</p>
+            <p class="tekst">Gemaakt door <a href="https://www.3-it.be/">3it bvba</a>.</p>
+            <a href="https://www.coeck.be/nl-be"><img class="image" src="./images/logo-coeck.png" alt="logo coeck nv"></a>
+        </div>
+        <div class="row spa" id="tabBeneden">
+            <div class="borders loginclass2">
+                <input class="inputtype" type="text" id="klantenid" placeholder="Klantenid" name="klantenid" autocomplete="off">
             </div>
-            <div class="mapframeid framezoekenclass">
-                <input class="inputtype" type="number" id="frameid" placeholder="Frameid" name="frameid" autocomplete="off">
+            <div class="borders loginclass2">
+                <input class="inputtype" type="text" id="naam" placeholder="Naam" name="naam" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="familienaam" placeholder="Familienaam" name="familienaam" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="land" placeholder="Land" name="land" autocomplete="off" list="landen2">
+                <datalist id="landen2">
+                    <option value="Albanië"></option>
+                    <option value="Andorra"></option>
+                    <option value="Armenië"></option>
+                    <option value="Azerbeidzjan"></option>
+                    <option value="België"></option>
+                    <option value="Bosnië en Herzegovina"></option>
+                    <option value="Bulgarije"></option>
+                    <option value="Cyprus"></option>
+                    <option value="Denemarken"></option>
+                    <option value="Duitsland"></option>
+                    <option value="Estland"></option>
+                    <option value="Finland"></option>
+                    <option value="Frankrijk"></option>
+                    <option value="Georgië"></option>
+                    <option value="Griekenland"></option>
+                    <option value="Hongarije"></option>
+                    <option value="Ierland"></option>
+                    <option value="IJsland"></option>
+                    <option value="Italië"></option>
+                    <option value="Kazachstan"></option>
+                    <option value="Kosovo"></option>
+                    <option value="Kroatië"></option>
+                    <option value="Letland"></option>
+                    <option value="Lichtenstein"></option>
+                    <option value="Litouwen"></option>
+                    <option value="Luxemburg"></option>
+                    <option value="Malta"></option>
+                    <option value="Moldavië"></option>
+                    <option value="Monaco"></option>
+                    <option value="Nederland"></option>
+                    <option value="Noord-Macedonië"></option>
+                    <option value="Noorwegen"></option>
+                    <option value="Oekraïne"></option>
+                    <option value="Oostenrijk"></option>
+                    <option value="Polen"></option>
+                    <option value="Portugal"></option>
+                    <option value="Roemenië"></option>
+                    <option value="Rusland"></option>
+                    <option value="San Marino"></option>
+                    <option value="Servië"></option>
+                    <option value="Slovenië"></option>
+                    <option value="Slowakije"></option>
+                    <option value="Spanje"></option>
+                    <option value="Tsjechië"></option>
+                    <option value="Turkije"></option>
+                    <option value="Vaticaanstad"></option>
+                    <option value="Verenigd Koninkrijk"></option>
+                    <option value="Wit-Rusland"></option>
+                    <option value="Zweden"></option>
+                    <option value="Zwitserland"></option>
+                </datalist>
+
+
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="gemeente" placeholder="Gemeente" name="gemeente" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="postcode" placeholder="Postcode" name="postcode" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="straat" placeholder="Straat" name="straat" autocomplete="off">
+            </div>
+            <div class="borders loginclass2">
+                <input class="inputtype" text="text" id="huisnummer" placeholder="Huisnummer" name="huisnummer" autocomplete="off">
             </div>
             <div class="center">
-                <!--                <input id="submitbutton2" type="submit" value="Zoeken">-->
-                <button id="button2">Zoeken</button>
+                <button id="submitbutton2" type="submit">Klant zoeken</button>
+            </div>
+            <div class="center paddingtop" id="searchtest">
+
+            </div>
+        </div>
+
+
+        <div class="row spa" id="tabInstelligen">
+            <div class="col s12 margin">
+                <div class="row">
+                    <div class="col s12 center mtop">
+                        <img class="coecknv" src="./images/logo-coeck.png" alt="logo coeck">
+                        <!--                        <form action="#">-->
+                        <div class="formclass">
+                            <div class="loginclass">
+                                <input class="inputtype" type="text" id="username" placeholder="Username" name="username" autocomplete="off">
+                            </div>
+                            <div class="loginclass">
+                                <input class="inputtype" type="password" id="password" placeholder="Password" name="password">
+                            </div>
+                            <div class="center">
+                                <button id="submitbutton" type="submit">Login now!</button>
+                            </div>
+                        </div>
+                        <div id="test">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row spa" id="tabTutorial">
+            <div class="col s12 lo">
+                <div id="map_canvas" class="map">
+                    <button id="button">Toon alle frames!</button>
+                    <button id="button4">Markers verwijderen!</button>
+                </div>
+                <div class="mapframeid framezoekenclass">
+                    <input class="inputtype" type="number" id="frameid" placeholder="Frameid" name="frameid" autocomplete="off">
+                </div>
+                <div class="center">
+                    <!--                <input id="submitbutton2" type="submit" value="Zoeken">-->
+                    <button id="button2">Zoeken</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.5.min.js"></script>
-<!--<script src="cordova.js"></script>-->
-<script src="./js/bundle.js" charset="utf-8"></script>
-<script src="js/pubnub.js"></script>
-<script type='application/javascript' src='/path/to/fastclick.js'></script>
-<!--<script src="js/database.js"></script>-->
-<!--<script src="js/app.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.29.5.min.js"></script>
+    <!--<script src="cordova.js"></script>-->
+    <script src="./js/bundle.js" charset="utf-8"></script>
+    <script src="js/pubnub.js"></script>
+    <script type='application/javascript' src='/path/to/fastclick.js'></script>
+    <!--<script src="js/database.js"></script>-->
+    <!--<script src="js/app.js"></script>-->
 
-<!--<script type="module" src="../www/js/app.js"></script>-->
-<!--<script type="module" src="js/data/databaseContext.js"></script>-->
-<!-- JavaScript defer: https://www.w3schools.com/tags/att_script_defer.asp -->
-<!--<script defer src="js/app.js"></script>-->
-<script defer src="js/index.js"></script>
-<!--<script defer src="js/data/databaseContext.js"></script>-->
+    <!--<script type="module" src="../www/js/app.js"></script>-->
+    <!--<script type="module" src="js/data/databaseContext.js"></script>-->
+    <!-- JavaScript defer: https://www.w3schools.com/tags/att_script_defer.asp -->
+    <!--<script defer src="js/app.js"></script>-->
+    <script defer src="js/index.js"></script>
+    <!--<script defer src="js/data/databaseContext.js"></script>-->
 </body>
+
 </html>

@@ -1,4 +1,3 @@
-
 const cosmos = require("@azure/cosmos");
 const CosmosClient = cosmos.CosmosClient;
 //config voor users table
@@ -18,18 +17,28 @@ attachFastClick(document.body);
 //functie om alle users van de database te verkrijgen
 async function main() {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext.create(client, databaseId, containerId);
 
     try {
         const querySpec = {
             query: "SELECT * from c"
         };
-        const {resources: items} = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(querySpec)
             .fetchAll();
         for (const item of items) {
@@ -55,11 +64,19 @@ async function main() {
 //functie om alle frames te krijgen die er zijn
 async function getframes() {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config2;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config2;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext2.create(client, databaseId, containerId);
 
     try {
@@ -67,7 +84,9 @@ async function getframes() {
             query: `SELECT distinct c.frameid from c`
         };
 
-        const {resources: items} = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(querySpec)
             .fetchAll();
 
@@ -85,9 +104,17 @@ async function getframes() {
 
 //----------------------------------------------------------------------------------------
 //functie om een user te deleten op basis van id en category
-async function deleteuser(id,category){
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+async function deleteuser(id, category) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     await dbContext.create(client, databaseId, containerId);
@@ -95,18 +122,25 @@ async function deleteuser(id,category){
     try {
         await container.item(`${id}`, `${category}`).delete();
 
-    } catch (err) {
-    }
+    } catch (err) {}
 }
 
 //functie om alle users te krijgen met meer informatie
 async function getusers4() {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext.create(client, databaseId, containerId);
 
     try {
@@ -115,7 +149,9 @@ async function getusers4() {
             query: `SELECT * from c`
         };
 
-        const {resources: datalines5} = await container.items
+        const {
+            resources: datalines5
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         datalines5.forEach(data => {
@@ -142,11 +178,19 @@ async function getusers4() {
 async function getframesdata() {
     var frames = await getframes();
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config2;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config2;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext2.create(client, databaseId, containerId);
 
     try {
@@ -160,7 +204,9 @@ async function getframesdata() {
                 const queryData = {
                     query: `SELECT distinct top 1 c.frameid, c.datum, c.coordinaten, c.land, c.deelstaat, c.gewest, c.gemeente, c.postcode , c.straat, c.huisnummer from c where c.frameid = "${string}" order by c._ts desc`
                 };
-                const {resources: datalines5} = await container.items
+                const {
+                    resources: datalines5
+                } = await container.items
                     .query(queryData)
                     .fetchAll();
                 datalines5.forEach(data => {
@@ -187,8 +233,7 @@ async function getframesdata() {
         }
         await forLoop();
         return lijst;
-    } catch
-        (err) {
+    } catch (err) {
         console.log(err.message);
     }
 }
@@ -197,11 +242,19 @@ async function getframesdata() {
 //getdata van de frames op basis van het frameid dit word gebruikt bij het search field waarbij je kunt zoeken op frameid
 async function getdataonframeid(dataframe) {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config2;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config2;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext2.create(client, databaseId, containerId);
 
     try {
@@ -209,7 +262,9 @@ async function getdataonframeid(dataframe) {
             query: `SELECT distinct top 1 c.frameid, c.datum, c.coordinaten, c.land, c.deelstaat, c.gewest, c.gemeente, c.postcode , c.straat, c.huisnummer from c where c.frameid = "${dataframe}" order by c.datum asc`
         };
 
-        const {resources: datalines5} = await container.items
+        const {
+            resources: datalines5
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         datalines5.forEach(data => {
@@ -244,30 +299,77 @@ async function getdataonframeid(dataframe) {
 
 
 //functie om klanten aan te maken
-async function klantenmaken(id,naam,familie,land,gemeente,postcode,straat,huisnummer,gsmnummer,frames) {
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+async function klantenmaken(id, naam, familie, land, gemeente, postcode, straat, huisnummer, gsmnummer, frames) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext3.create(client, databaseId, containerId);
-    container.items.create({klantid: id, naam: naam, familienaam: familie, land: land, gemeente: gemeente, postcode: postcode, straat : straat, huisnummer:huisnummer, gsm : gsmnummer,frames:{frameid:frames} });
+    container.items.create({
+        klantid: id,
+        naam: naam,
+        familienaam: familie,
+        land: land,
+        gemeente: gemeente,
+        postcode: postcode,
+        straat: straat,
+        huisnummer: huisnummer,
+        gsm: gsmnummer,
+        frames: {
+            frameid: frames
+        }
+    });
 }
 
 //functie om user aantemaken
-async function usermaken(id,usernaam,naam,familienaam,wachtwoord) {
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+async function usermaken(id, usernaam, naam, familienaam, wachtwoord) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext.create(client, databaseId, containerId);
-    container.items.create({userid: id, usernaam: usernaam, naam: naam, familienaam: familienaam, wachtwoord: wachtwoord});
+
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(`${wachtwoord}`, salt);
+
+    container.items.create({
+        userid: id,
+        usernaam: usernaam,
+        naam: naam,
+        familienaam: familienaam,
+        wachtwoord: hash
+    });
 }
 //functie om frame toetevoegen
-async function framestoevoegen(klantenid,frameid) {
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+async function framestoevoegen(klantenid, frameid) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     try {
@@ -276,20 +378,29 @@ async function framestoevoegen(klantenid,frameid) {
             query: `SELECT * from c where c.klantid = "${klantenid}"`
         };
 
-        const { resources: items } = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         items[0].frames.frameid = frameid;
 
-        await container.item(`${items[0].id}`,`${items[0].klantid}`).replace(items[0]);
-    } catch (err) {
-    }
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
 }
 
 //klantadres editen
-async function editklantadres(klantenid,straat,huisnummer,postcode,gemeente,land) {
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+async function editklantadres(klantenid, straat, huisnummer, postcode, gemeente, land) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     try {
@@ -297,7 +408,9 @@ async function editklantadres(klantenid,straat,huisnummer,postcode,gemeente,land
             query: `SELECT * from c where c.klantid = "${klantenid}"`
         };
 
-        const { resources: items } = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         items[0].land = land;
@@ -306,15 +419,23 @@ async function editklantadres(klantenid,straat,huisnummer,postcode,gemeente,land
         items[0].straat = straat;
         items[0].huisnummer = huisnummer;
 
-        await container.item(`${items[0].id}`,`${items[0].klantid}`).replace(items[0]);
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
     } catch (err) {
         // console.log(err.message);
     }
 }
 //klant gsmnummer editen
-async function editklantgsm(klantenid,gsmnummer) {
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+async function editklantgsm(klantenid, gsmnummer) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     try {
@@ -322,19 +443,180 @@ async function editklantgsm(klantenid,gsmnummer) {
             query: `SELECT * from c where c.klantid = "${klantenid}"`
         };
 
-        const { resources: items } = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         items[0].gsm = gsmnummer;
 
-        await container.item(`${items[0].id}`,`${items[0].klantid}`).replace(items[0]);
-    } catch (err) {
-    }
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
 }
+
+//klant straat editen
+async function editklantstraat(klantenid, newstraat) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+    try {
+        const queryData2 = {
+            query: `SELECT * from c where c.klantid = "${klantenid}"`
+        };
+
+        const {
+            resources: items
+        } = await container.items
+            .query(queryData2)
+            .fetchAll();
+        items[0].straat = newstraat;
+
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
+}
+
+//klant huisnummer editen
+async function editklanthuisnummer(klantenid, newhuisnummer) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+    try {
+        const queryData2 = {
+            query: `SELECT * from c where c.klantid = "${klantenid}"`
+        };
+
+        const {
+            resources: items
+        } = await container.items
+            .query(queryData2)
+            .fetchAll();
+        items[0].huisnummer = newhuisnummer;
+
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
+}
+
+//klant postcode editen
+async function editklantpostcode(klantenid, newpostcode) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+    try {
+        const queryData2 = {
+            query: `SELECT * from c where c.klantid = "${klantenid}"`
+        };
+
+        const {
+            resources: items
+        } = await container.items
+            .query(queryData2)
+            .fetchAll();
+        items[0].postcode = newpostcode;
+
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
+}
+
+//klant gemeente editen
+async function editklantgemeente(klantenid, newgemeente) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+    try {
+        const queryData2 = {
+            query: `SELECT * from c where c.klantid = "${klantenid}"`
+        };
+
+        const {
+            resources: items
+        } = await container.items
+            .query(queryData2)
+            .fetchAll();
+        items[0].gemeente = newgemeente;
+
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
+}
+//klant land editen
+async function editklantland(klantenid, newland) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+    try {
+        const queryData2 = {
+            query: `SELECT * from c where c.klantid = "${klantenid}"`
+        };
+
+        const {
+            resources: items
+        } = await container.items
+            .query(queryData2)
+            .fetchAll();
+        items[0].land = newland;
+
+        await container.item(`${items[0].id}`, `${items[0].klantid}`).replace(items[0]);
+    } catch (err) {}
+}
+
+
+
 //editen van een user zijn wachtwoord
-async function userediten(id,userid,wachtwoord) {
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+async function userediten(id, userid, wachtwoord) {
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     try {
@@ -342,20 +624,33 @@ async function userediten(id,userid,wachtwoord) {
             query: `SELECT * from c where c.userid = "${userid}"`
         };
 
-        const { resources: items } = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(queryData2)
             .fetchAll();
-        items[0].wachtwoord = wachtwoord;
 
-        await container.item(`${id}`,`${userid}`).replace(items[0]);
-    } catch (err) {
-    }
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(`${wachtwoord}`, salt);
+
+        items[0].wachtwoord = hash;
+
+        await container.item(`${id}`, `${userid}`).replace(items[0]);
+    } catch (err) {}
 }
 
 //laatste userid
 async function lastuserid() {
-    const {endpoint, key, databaseId, containerId} = config;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
     var string;
@@ -364,181 +659,182 @@ async function lastuserid() {
             query: `SELECT top 1 c.userid from c order by c.userid desc`
         };
 
-        const { resources: items } = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(queryData2)
             .fetchAll();
 
-        for(i in items){
+        for (i in items) {
             string = items[i];
         }
         return string;
-    } catch (err) {
-    }
+    } catch (err) {}
 }
 //function om een land om te zetten naar een internationale code zodat een bericht kan verstuurd worden naar mensen in het buitenland etc
-function landtocodegsm(land){
-    countrycode="";
-    if(land=="Albanië"){
-        countrycode="+355";
+function landtocodegsm(land) {
+    countrycode = "";
+    if (land == "Albanië") {
+        countrycode = "+355";
     }
-    if(land=="Andorra"){
-        countrycode="+376";
+    if (land == "Andorra") {
+        countrycode = "+376";
     }
-    if(land=="Armenië"){
-        countrycode="+374";
+    if (land == "Armenië") {
+        countrycode = "+374";
     }
-    if(land=="Azerbeidzjan"){
-        countrycode="+994";
+    if (land == "Azerbeidzjan") {
+        countrycode = "+994";
     }
-    if (land=="België"){
-        countrycode="+32";
+    if (land == "België") {
+        countrycode = "+32";
     }
-    if (land=="belgie"){
-        countrycode="+32";
+    if (land == "belgie") {
+        countrycode = "+32";
     }
-    if (land=="Belgie"){
-        countrycode="+32";
+    if (land == "Belgie") {
+        countrycode = "+32";
     }
-    if (land=="belgië"){
-        countrycode="+32";
+    if (land == "belgië") {
+        countrycode = "+32";
     }
-    if(land=="Bosnië en Herzegovina"){
-        countrycode="+387";
+    if (land == "Bosnië en Herzegovina") {
+        countrycode = "+387";
     }
-    if(land=="Bulgarije"){
-        countrycode="+359";
+    if (land == "Bulgarije") {
+        countrycode = "+359";
     }
-    if(land=="Cyprus"){
-        countrycode="+357";
+    if (land == "Cyprus") {
+        countrycode = "+357";
     }
-    if(land=="Denemarken"){
-        countrycode="+45";
+    if (land == "Denemarken") {
+        countrycode = "+45";
     }
-    if(land=="Duitsland"){
-        countrycode="+49";
+    if (land == "Duitsland") {
+        countrycode = "+49";
     }
-    if(land=="Estland"){
-        countrycode="+372";
+    if (land == "Estland") {
+        countrycode = "+372";
     }
-    if(land=="Finland"){
-        countrycode="+358";
+    if (land == "Finland") {
+        countrycode = "+358";
     }
-    if(land=="Frankrijk"){
-        countrycode="+33";
+    if (land == "Frankrijk") {
+        countrycode = "+33";
     }
-    if(land=="Georgië"){
-        countrycode="+995";
+    if (land == "Georgië") {
+        countrycode = "+995";
     }
-    if(land=="Griekenland"){
-        countrycode="+30";
+    if (land == "Griekenland") {
+        countrycode = "+30";
     }
-    if(land=="Hongarije"){
-        countrycode="+36";
+    if (land == "Hongarije") {
+        countrycode = "+36";
     }
-    if(land=="Ierland"){
-        countrycode="+353";
+    if (land == "Ierland") {
+        countrycode = "+353";
     }
-    if(land=="IJsland"){
-        countrycode="+354";
+    if (land == "IJsland") {
+        countrycode = "+354";
     }
-    if(land=="Italië"){
-        countrycode="+39";
+    if (land == "Italië") {
+        countrycode = "+39";
     }
-    if(land=="Kazachstan"){
-        countrycode="+7";
+    if (land == "Kazachstan") {
+        countrycode = "+7";
     }
-    if(land=="Kosovo"){
-        countrycode="+383";
+    if (land == "Kosovo") {
+        countrycode = "+383";
     }
-    if(land=="Kroatië"){
-        countrycode="+385";
+    if (land == "Kroatië") {
+        countrycode = "+385";
     }
-    if(land=="Letland"){
-        countrycode="+856";
+    if (land == "Letland") {
+        countrycode = "+856";
     }
-    if(land=="Liechtenstein"){
-        countrycode="+423";
+    if (land == "Liechtenstein") {
+        countrycode = "+423";
     }
-    if(land=="Litouwen"){
-        countrycode="+370";
+    if (land == "Litouwen") {
+        countrycode = "+370";
     }
-    if(land=="Luxemburg"){
-        countrycode="+352";
+    if (land == "Luxemburg") {
+        countrycode = "+352";
     }
-    if(land=="Malta"){
-        countrycode="+356";
+    if (land == "Malta") {
+        countrycode = "+356";
     }
-    if(land=="Moldavië"){
-        countrycode="+373";
+    if (land == "Moldavië") {
+        countrycode = "+373";
     }
-    if(land=="Monaco"){
-        countrycode="+377";
+    if (land == "Monaco") {
+        countrycode = "+377";
     }
-    if(land=="Montenegro"){
-        countrycode="+382";
+    if (land == "Montenegro") {
+        countrycode = "+382";
     }
-    if(land=="Nederland"){
-        countrycode="+31";
+    if (land == "Nederland") {
+        countrycode = "+31";
     }
-    if(land=="Noord-Macedonië"){
-        countrycode="+389";
+    if (land == "Noord-Macedonië") {
+        countrycode = "+389";
     }
-    if(land=="Noorwegen"){
-        countrycode="+47";
+    if (land == "Noorwegen") {
+        countrycode = "+47";
     }
-    if(land=="Oekraïne"){
-        countrycode="+380";
+    if (land == "Oekraïne") {
+        countrycode = "+380";
     }
-    if(land=="Oostenrijk"){
-        countrycode="+43";
+    if (land == "Oostenrijk") {
+        countrycode = "+43";
     }
-    if(land=="Polen"){
-        countrycode="+48";
+    if (land == "Polen") {
+        countrycode = "+48";
     }
-    if(land=="Portugal"){
-        countrycode="+351";
+    if (land == "Portugal") {
+        countrycode = "+351";
     }
-    if(land=="Roemenië"){
-        countrycode="+40";
+    if (land == "Roemenië") {
+        countrycode = "+40";
     }
-    if(land=="Rusland"){
-        countrycode="+7";
+    if (land == "Rusland") {
+        countrycode = "+7";
     }
-    if(land=="San Marino"){
-        countrycode="+378";
+    if (land == "San Marino") {
+        countrycode = "+378";
     }
-    if(land=="Servië"){
-        countrycode="+381";
+    if (land == "Servië") {
+        countrycode = "+381";
     }
-    if(land=="Slovenië"){
-        countrycode="+386";
+    if (land == "Slovenië") {
+        countrycode = "+386";
     }
-    if(land=="Slowakije"){
-        countrycode="+421";
+    if (land == "Slowakije") {
+        countrycode = "+421";
     }
-    if(land=="Spanje"){
-        countrycode="+34";
+    if (land == "Spanje") {
+        countrycode = "+34";
     }
-    if(land=="Tsjechië"){
-        countrycode="+420";
+    if (land == "Tsjechië") {
+        countrycode = "+420";
     }
-    if(land=="Turkije"){
-        countrycode="+90";
+    if (land == "Turkije") {
+        countrycode = "+90";
     }
-    if(land=="Vaticaanstad"){
-        countrycode="+379";
+    if (land == "Vaticaanstad") {
+        countrycode = "+379";
     }
-    if(land=="Verenigd Koninkrijk"){
-        countrycode="+44";
+    if (land == "Verenigd Koninkrijk") {
+        countrycode = "+44";
     }
-    if(land=="Wit-Rusland"){
-        countrycode="+375";
+    if (land == "Wit-Rusland") {
+        countrycode = "+375";
     }
-    if(land=="Zweden"){
-        countrycode="+46";
+    if (land == "Zweden") {
+        countrycode = "+46";
     }
-    if(land=="Zwitserland"){
-        countrycode="+41";
+    if (land == "Zwitserland") {
+        countrycode = "+41";
     }
 
     return countrycode;
@@ -549,11 +845,19 @@ function landtocodegsm(land){
 //functie om alle klanten hun data te krijgen
 async function getklanten() {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext3.create(client, databaseId, containerId);
 
     try {
@@ -563,12 +867,14 @@ async function getklanten() {
             query: `SELECT * from c`
         };
 
-        const {resources: items} = await container.items
+        const {
+            resources: items
+        } = await container.items
             .query(querySpec)
             .fetchAll();
 
         items.forEach(klant => {
-            const tussenlijst=[];
+            const tussenlijst = [];
             // console.log("printen van gegevens frameids");
             tussenlijst.push(`${klant.klantid}`);
             tussenlijst.push(`${klant.naam}`);
@@ -595,11 +901,19 @@ async function getklanten() {
 //functie om klanten op een id te verkrijgen
 async function getklantenonid2(dataframe) {
     let lijst = [];
-    const {endpoint, key, databaseId, containerId} = config3;
-    const client = new CosmosClient({endpoint, key});
+    const {
+        endpoint,
+        key,
+        databaseId,
+        containerId
+    } = config3;
+    const client = new CosmosClient({
+        endpoint,
+        key
+    });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-// //make sure database is already setup, else create it
+    // //make sure database is already setup, else create it
     await dbContext3.create(client, databaseId, containerId);
 
     try {
@@ -608,7 +922,9 @@ async function getklantenonid2(dataframe) {
             query: `SELECT * from c where c.klantid = "${dataframe}"`
         };
 
-        const {resources: datalines5} = await container.items
+        const {
+            resources: datalines5
+        } = await container.items
             .query(queryData2)
             .fetchAll();
         datalines5.forEach(data => {
@@ -628,14 +944,13 @@ async function getklantenonid2(dataframe) {
         });
         return lijst;
 
-    } catch (err) {
-    }
+    } catch (err) {}
 }
 
 
 
 
-var ingelogged=0;
+var ingelogged = 0;
 var allmarkers;
 var useridloggedin;
 
@@ -670,16 +985,16 @@ function cancelDuplicates(fn, threshhold, scope) {
 
 //wanneer er op users geklikt word
 var usersdata = [];
-$('#users').click( async function () {
+$('#users').click(async function () {
     $('ul.collection').empty();
     //neem alle users
     usersdata = await getusers4();
     //voor elke user
-    for (i in usersdata){
+    for (i in usersdata) {
         //als je bent ingelogged
-        //maak je een li aan met daarin een delete knop, informatie van de klant en een edit knop met telkens het id van de klant. deze li voeg je uiteindelijk toe aan de ul op html
+        //maak je een li aan met daarin een delete knop, informatie van de user en een edit knop met telkens het id van de user. deze li voeg je uiteindelijk toe aan de ul op html
         //wanneer de ingelogde user id 1 heeft dus de enige met admin rechten dan kun je iedereen editen
-        if(useridloggedin== 1){
+        if (useridloggedin == 1) {
             let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}">             
             <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>
             <div data-task="test">
@@ -693,9 +1008,9 @@ $('#users').click( async function () {
             $('ul.collection').append(item);
         }
         //anders heb je geen admin rechten en kun je enkel jezelf editen
-        else{
+        else {
             //wannneer het jou profiel is toon je een edit button
-            if (usersdata[i][0] == useridloggedin){
+            if (usersdata[i][0] == useridloggedin) {
                 let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}">
             <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>
             <div data-task="test" contenteditable>
@@ -710,7 +1025,7 @@ $('#users').click( async function () {
             }
 
             //anders is het een andere user, hierbij is dus geen edit button
-            else{
+            else {
                 let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}"> 
 <!--            <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>-->
             <div data-task="test">
@@ -726,11 +1041,11 @@ $('#users').click( async function () {
     }
 
     //wanneer je om de delete knop drukt van een user
-    $('ul').on('click', '.deleteTask',  async function(event) {
+    $('ul').on('click', '.deleteTask', async function (event) {
         //zorgt ervoor dat je niet meerdere malen de notificatie krijgt
         event.stopImmediatePropagation();
         var category = "";
-        let id = $(this).data('task');   // id = waarde x uit data-task="x"
+        let id = $(this).data('task'); // id = waarde x uit data-task="x"
         for (i in usersdata) {
             if (usersdata[i][0] == id) {
                 category = usersdata[i][4];
@@ -742,20 +1057,20 @@ $('#users').click( async function () {
         navigator.notification.confirm("Weet je zeker dat je de user wilt verwijderen", onConfirm, "Ben je zeker?", buttons);
         //als de notificatie goed is uitgevoerd.
         async function onConfirm(buttonIndex) {
-            if (buttonIndex ==1){
+            if (buttonIndex == 1) {
                 //als er gedrukt word op ja, dan word de user verwijderd
                 deleteuser(category, id);
                 //als de user die verwijderd word het profiel is dat op het moment is ingelogged ga je naar de login pagina
-                if (id == useridloggedin){
+                if (id == useridloggedin) {
                     $('#tabInstelligen').show();
                     $('#tabshowuser').hide();
                 }
                 //anders word de pagina gerefreshed met de nieuwe data. Dit wilt zeggen dat de user dus niet meer getoond word en dus verwijderd is.
-                else{
+                else {
                     usersdata = await getusers4();
                     $('ul.collection').empty();
                     for (i in usersdata) {
-                        if(useridloggedin== 1){
+                        if (useridloggedin == 1) {
                             let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}">             
             <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>
             <div data-task="test" contenteditable>
@@ -767,9 +1082,8 @@ $('#users').click( async function () {
             <i class="material-icons circle blue edituser" data-task="${usersdata[i][0]}">edit</i>
 			</li>`;
                             $('ul.collection').append(item);
-                        }
-                        else{
-                            if (usersdata[i][0] == useridloggedin){
+                        } else {
+                            if (usersdata[i][0] == useridloggedin) {
                                 let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}">             
             <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>
             <div data-task="test" contenteditable>
@@ -781,10 +1095,7 @@ $('#users').click( async function () {
             <i class="material-icons circle blue edituser" data-task="${usersdata[i][0]}">edit</i>
 			</li>`;
                                 $('ul.collection').append(item);
-                            }
-
-
-                            else{
+                            } else {
                                 let item = `<li class="collection-item avatar" data-task="${usersdata[i][0]}"> 
             <i class="material-icons circle red deleteTask" data-task="${usersdata[i][0]}">delete_forever</i>
             <div data-task="test" contenteditable>
@@ -809,11 +1120,11 @@ $('#users').click( async function () {
 
     });
     //wanneer er op de knop editen gedrukt word
-    $('ul').on('click', '.edituser',  async function(event) {
+    $('ul').on('click', '.edituser', async function (event) {
         //dit zorgt ervoor dat een notificatie niet meerdere malen getoond word.
         event.stopImmediatePropagation();
         var category = "";
-        let id = $(this).data('task');   // id = waarde x uit data-task="x"
+        let id = $(this).data('task'); // id = waarde x uit data-task="x"
         var test = "";
         //voor elke user
         for (i in usersdata) {
@@ -823,43 +1134,76 @@ $('#users').click( async function () {
                 category = usersdata[i][4];
             }
         }
+        console.log("tester" + test);
         //de buttons voor de notificatie
-        let buttons = ['Change','Cancel'];
+        let buttons = ['Change', 'Cancel'];
         //opstellen van de notificatie
-        navigator.notification.prompt("Weet je zeker dat je het wachtwoord wilt veranderen?", onPrompt, "oud wachtwoord,nieuw wachtwoord,herhaal wachtwoord", buttons);
+        navigator.notification.prompt("Weet je zeker dat je het wachtwoord wilt veranderen?", onPrompt, "oud wachtwoord.nieuw wachtwoord.herhaal wachtwoord", buttons);
 
 
 
         //wanneer de notificatie goed is aangekomen
-        async function onPrompt(buttonIndex){
+        async function onPrompt(buttonIndex) {
             let inputtest = buttonIndex.input1.split(".");
+            var count = 0;
+            for (i in inputtest) {
+                count++;
+            }
             // console.log("test3" + inputtest[0],inputtest[1],inputtest[2]);
             // console.log("test4" + inputtest[0]);
             // console.log("test5" + test);
             //als het een admin profiel is kun je het wachtwoord aanpassen zonder het vorige passwoord te weten.
-            if (useridloggedin==1){
-                userediten(category,id,inputtest[2]);
-                M.toast({html: 'Wachtwoord is aangepast', displayLength: 3000, classes: 'green rounded center'});
+            if (useridloggedin == 1) {
+                if (count == 1) {
+                    wachtwoord = inputtest[0];
+                    userediten(category, id, wachtwoord);
+                    M.toast({
+                        html: 'Wachtwoord is aangepast',
+                        displayLength: 3000,
+                        classes: 'green rounded center'
+                    });
+                } else {
+                    wachtwoord = inputtest[2];
+                    userediten(category, id, wachtwoord);
+                    M.toast({
+                        html: 'Wachtwoord is aangepast',
+                        displayLength: 3000,
+                        classes: 'green rounded center'
+                    });
+                }
             }
             //anders is het geen admin en moet hij dus het vorige wachtwoord weten
-            else{
-                if (inputtest[0] == test){
+            else {
+                if (bcrypt.compareSync(inputtest[0], test) == true) {
                     //als er op de knop change gedrukt word
-                    if (buttonIndex.buttonIndex == 1){
+                    if (buttonIndex.buttonIndex == 1) {
                         //en het oude wachtwoord overeenkomt met de gekende data en de nieuwe wachtwoorden overeenkomen
-                        if ((inputtest[1] == inputtest[2])&&(inputtest[0]!==undefined)){
-                            userediten(category,id,inputtest[2]);
-                            M.toast({html: 'Wachtwoord is aangepast', displayLength: 3000, classes: 'green rounded center'});
+                        if ((inputtest[1] == inputtest[2]) && (inputtest[0] !== undefined)) {
+                            wachtwoord = inputtest[2];
+
+                            userediten(category, id, wachtwoord);
+                            M.toast({
+                                html: 'Wachtwoord is aangepast',
+                                displayLength: 3000,
+                                classes: 'green rounded center'
+                            });
                             usersdata = await getusers4();
                         }
                         //anders is het oude wachtwoord fout, of het nieuwe en het herhaalde wachtwoord niet hetzelfde
-                        else{
-                            M.toast({html: 'Wachtwoorden komen niet overeen', displayLength: 3000, classes: 'red rounded center'});
+                        else {
+                            M.toast({
+                                html: 'Wachtwoorden komen niet overeen',
+                                displayLength: 3000,
+                                classes: 'red rounded center'
+                            });
                         }
                     }
-                }
-                else{
-                    M.toast({html: 'Wachtwoord komen niet overeen!', displayLength: 3000, classes: 'red rounded center'});
+                } else {
+                    M.toast({
+                        html: 'Wachtwoord komen niet overeen!',
+                        displayLength: 3000,
+                        classes: 'red rounded center'
+                    });
                 }
             }
         }
@@ -872,7 +1216,7 @@ $('#users').click( async function () {
 // knop login pagina
 $('#submitbutton').click(async function () {
     //input field
-    subscribeKey = $('#password').val();
+    password = $('#password').val();
     publishKey = $('#username').val();
     //maak username 1ste letter hoofdletter
     publishKey = capitalizeFirstLetter(publishKey);
@@ -881,11 +1225,12 @@ $('#submitbutton').click(async function () {
     // console.log(data);
     let login;
     //voor elke gebruiker
+
     for (i in data) {
         username = data[i][0];
         wachtwoord = data[i][1];
         //als het wachtwoord en user overeenkomt
-        if ((publishKey == username) && (subscribeKey == wachtwoord)) {
+        if ((publishKey == username) && (bcrypt.compareSync(password, wachtwoord) == true)) {
             login = "goed";
             useridloggedin = data[i][2];
         }
@@ -894,9 +1239,13 @@ $('#submitbutton').click(async function () {
     if (login == "goed") {
         $('#username').val("").empty();
         $('#password').val("").empty();
-        ingelogged=1;
+        ingelogged = 1;
         frames = await getframes();
-        M.toast({html: 'Je bent ingelogd', displayLength: 3000, classes: 'green rounded center'});
+        M.toast({
+            html: 'Je bent ingelogd',
+            displayLength: 3000,
+            classes: 'green rounded center'
+        });
         $('#tabTutorial').show();
         $('#tabInstelligen').hide();
 
@@ -906,10 +1255,13 @@ $('#submitbutton').click(async function () {
 
         //toont de map op de basis locatie midden belgie
         var div = document.getElementById("map_canvas");
-// Create a Google Maps native view under the map_canvas div.
+        // Create a Google Maps native view under the map_canvas div.
         var map = plugin.google.maps.Map.getMap(div);
         map.animateCamera({
-            target: {lat: 50.64022, lng: 4.66667},
+            target: {
+                lat: 50.64022,
+                lng: 4.66667
+            },
             zoom: 5,
             tilt: 0,
             bearing: 0,
@@ -921,13 +1273,17 @@ $('#submitbutton').click(async function () {
         // console.log("fout");
         $('#tabInstelligen').show();
 
-        M.toast({html: 'Wachtwoord of username ongeldig', displayLength: 3000, classes: 'red rounded center'});
+        M.toast({
+            html: 'Wachtwoord of username ongeldig',
+            displayLength: 3000,
+            classes: 'red rounded center'
+        });
     }
 });
 
 //wanneer er op logout geclicked word
 $('#logout').click(async function () {
-    ingelogged=0;
+    ingelogged = 0;
 });
 
 //code voor de map
@@ -936,15 +1292,15 @@ document.addEventListener("deviceready", async function () {
     let aantallist;
     const database2 = await getframesdata();
 
-// If you click the button, do something...
+    // If you click the button, do something...
     var button = document.getElementById("button");
     //als erop de button gedrukt word
     button.addEventListener("click", function () {
         //en je bent ingelogged toon alle frames op de map met behulp van markers
-        if (ingelogged==1) {
+        if (ingelogged == 1) {
             //test
             var div = document.getElementById("map_canvas");
-// Create a Google Maps native view under the map_canvas div.
+            // Create a Google Maps native view under the map_canvas div.
             var map = plugin.google.maps.Map.getMap(div);
 
             //maak een list van alle markers
@@ -952,7 +1308,10 @@ document.addEventListener("deviceready", async function () {
 
             // Move to the position with animation
             map.animateCamera({
-                target: {lat: 50.64022, lng: 4.66667},
+                target: {
+                    lat: 50.64022,
+                    lng: 4.66667
+                },
                 zoom: 7,
                 tilt: 0,
                 bearing: 0,
@@ -963,15 +1322,18 @@ document.addEventListener("deviceready", async function () {
             for (k in database2) {
                 //maken van een marker
                 var marker = map.addMarker({
-                    position: {lat: database2[k][2], lng: database2[k][3]},
+                    position: {
+                        lat: database2[k][2],
+                        lng: database2[k][3]
+                    },
                     title: "Frameid: " + database2[k][0],
                     // snippet: database[i][4] + ", " + database[i][5] + ", " + database[i][6] + ", " + database[i][7] + ", " + database[i][8] + ", " + database[i][9] + ", " + database[i][10],
-                    snippet: database2[k][1] + ", " + database2[k][4] + ", " + database2[k][5] + ", " + database2[k][6] + ", " + database2[k][7] + ", " + database2[k][8] + ", " + database2[k][9]+ ", " + database2[k][10],
+                    snippet: database2[k][1] + ", " + database2[k][4] + ", " + database2[k][5] + ", " + database2[k][6] + ", " + database2[k][7] + ", " + database2[k][8] + ", " + database2[k][9] + ", " + database2[k][10],
                     icon: {
                         url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
-                        size:{
-                            width : 32,
-                            height : 32
+                        size: {
+                            width: 32,
+                            height: 32
                         }
                     },
                     animation: plugin.google.maps.Animation.BOUNCE
@@ -989,27 +1351,30 @@ document.addEventListener("deviceready", async function () {
 
         }
         //als je niet bent ingelogged geweest, ga terug naar de login pagina
-        else{
+        else {
             $('#tabTutorial').hide();
             $('#tabInstelligen').show();
         }
     });
     //wanneer er op de button geclicked word om alle frames te verwijderen
     var button4 = document.getElementById("button4");
-    button4.addEventListener("click",function () {
+    button4.addEventListener("click", function () {
         var div = document.getElementById("map_canvas");
-// Create a Google Maps native view under the map_canvas div.
+        // Create a Google Maps native view under the map_canvas div.
         var map = plugin.google.maps.Map.getMap(div);
         //elke marker uit allmarkers worden eruit gehaald
-        for(i in allmarkers){
-            if (allmarkers[i] !== undefined){
+        for (i in allmarkers) {
+            if (allmarkers[i] !== undefined) {
                 allmarkers[i].remove();
                 // console.log("allmarkers" + allmarkers[i]);
             }
         }
         //map word weer gecentreerd op belgië
         map.animateCamera({
-            target: {lat: 50.64022, lng: 4.66667},
+            target: {
+                lat: 50.64022,
+                lng: 4.66667
+            },
             zoom: 7,
             tilt: 0,
             bearing: 0,
@@ -1022,9 +1387,9 @@ document.addEventListener("deviceready", async function () {
     var button2 = document.getElementById("button2");
     button2.addEventListener("click", function () {
         //en je bent ingelogged
-        if (ingelogged==1) {
+        if (ingelogged == 1) {
             var div = document.getElementById("map_canvas");
-// Create a Google Maps native view under the map_canvas div.
+            // Create a Google Maps native view under the map_canvas div.
             var map = plugin.google.maps.Map.getMap(div);
             markers2 = [];
             //vraag frameid op die gewild is (ingegeven is).
@@ -1040,7 +1405,10 @@ document.addEventListener("deviceready", async function () {
                     // console.log(database2[i][0]);
 
                     map.animateCamera({
-                        target: {lat: database2[i][2], lng: database2[i][3]},
+                        target: {
+                            lat: database2[i][2],
+                            lng: database2[i][3]
+                        },
                         zoom: 17,
                         tilt: 0,
                         bearing: 0,
@@ -1049,15 +1417,18 @@ document.addEventListener("deviceready", async function () {
 
                     // Add a maker
                     var marker = map.addMarker({
-                        position: {lat: database2[i][2], lng: database2[i][3]},
+                        position: {
+                            lat: database2[i][2],
+                            lng: database2[i][3]
+                        },
                         title: "Frameid: " + database2[i][0],
                         // snippet: database[i][4] + ", " + database[i][5] + ", " + database[i][6] + ", " + database[i][7] + ", " + database[i][8] + ", " + database[i][9] + ", " + database[i][10],
-                        snippet: database2[i][1] + ", " +database2[i][4] + ", " + database2[i][5] + ", " + database2[i][6] + ", " + database2[i][7] + ", " + database2[i][8] + ", " + database2[i][9]+ ", " + database2[i][10],
+                        snippet: database2[i][1] + ", " + database2[i][4] + ", " + database2[i][5] + ", " + database2[i][6] + ", " + database2[i][7] + ", " + database2[i][8] + ", " + database2[i][9] + ", " + database2[i][10],
                         icon: {
                             url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
-                            size:{
-                                width : 32,
-                                height : 32
+                            size: {
+                                width: 32,
+                                height: 32
                             }
                         },
                         animation: plugin.google.maps.Animation.BOUNCE
@@ -1098,7 +1469,7 @@ document.addEventListener("deviceready", async function () {
             var count = 0;
 
             lastuser = await lastuserid();
-            for (i in lastuser){
+            for (i in lastuser) {
                 count = lastuser[i];
             }
             countint = parseInt(count);
@@ -1151,15 +1522,16 @@ document.addEventListener("deviceready", async function () {
                     });
                 }
 
-        }
+            }
             //als je enkele velden leeg hebt gelaten met een *
             else {
-            M.toast({html: 'Vul alle gegevens in met een *',
-                displayLength: 3000,
-                classes: 'red rounded center'
-            });
+                M.toast({
+                    html: 'Vul alle gegevens in met een *',
+                    displayLength: 3000,
+                    classes: 'red rounded center'
+                });
+            }
         }
-    }
         //als je niet ingelogged bent ga terug naar de login pagina
         else {
             $('#tabmakeuser').hide();
@@ -1171,18 +1543,18 @@ document.addEventListener("deviceready", async function () {
     //als er op de klantmaken gedrukt word
     $('#submitbuttonklantmaken').click(async function () {
         //en je bent ingelogged
-        if (ingelogged == 1){
+        if (ingelogged == 1) {
             //opvragen alle klanten
-            lijst= await getklanten();
+            lijst = await getklanten();
             var count = 0;
             //voor elke klant die het getal +1
-            for(i in lijst) {
+            for (i in lijst) {
                 count++;
             }
 
             //vraag de gegevens op van de nieuwe klant
 
-            klantenid = count+1;
+            klantenid = count + 1;
             naam = $('#naam2').val();
             familie = $('#familienaam2').val();
             land = $('#land2').val();
@@ -1201,23 +1573,26 @@ document.addEventListener("deviceready", async function () {
 
             countrycode = landtocodegsm(land);
             //indien de gsm nummer geen + in het input field heeft zet de het land om naar een europese gsm code en plak dit voor het nummer en verwijder het 1 ste ingegeven nummer
-            var europegsm="";
-            if(gsmnummer.includes("+")){
-                europegsm=gsmnummer;
-            }
-            else{
+            var europegsm = "";
+            if (gsmnummer.includes("+")) {
+                europegsm = gsmnummer;
+            } else {
                 gsmnummersplit = gsmnummer.substring(1);
-                europegsm=countrycode + gsmnummersplit;
+                europegsm = countrycode + gsmnummersplit;
                 // console.log(gsmnummersplit);
                 // console.log("gsmnummer heeft geen +");
             }
             //zet klantenid van int naar string
-            klantenid2=klantenid.toString();
+            klantenid2 = klantenid.toString();
 
             //als er geen lege velden zijn en je bent ingelogged, maak klant aan
-            if ((naam!="")&&(familie!="")&&(land!="")&&(gemeente!="")&&(postcode!="")&&(straat!="")&&(huisnummer!="")&&(gsmnummer!="")&&ingelogged==1){
-                klantenmaken(klantenid2,naam,familie,land,gemeente,postcode,straat,huisnummer,europegsm,frames);
-                M.toast({html: 'klant is aangemaakt', displayLength: 3000, classes: 'green rounded center'});
+            if ((naam != "") && (familie != "") && (land != "") && (gemeente != "") && (postcode != "") && (straat != "") && (huisnummer != "") && (gsmnummer != "") && ingelogged == 1) {
+                klantenmaken(klantenid2, naam, familie, land, gemeente, postcode, straat, huisnummer, europegsm, frames);
+                M.toast({
+                    html: 'klant is aangemaakt',
+                    displayLength: 3000,
+                    classes: 'green rounded center'
+                });
                 $('#naam2').val("").empty();
                 $('#familienaam2').val("").empty();
                 $('#land2').val("").empty();
@@ -1230,11 +1605,14 @@ document.addEventListener("deviceready", async function () {
             }
             //anders komt er een notificatie dat je alle gegevens met een * moet invullen
             else {
-                M.toast({html: 'Vul alle gegevens in met een *', displayLength: 3000, classes: 'red rounded center'});
+                M.toast({
+                    html: 'Vul alle gegevens in met een *',
+                    displayLength: 3000,
+                    classes: 'red rounded center'
+                });
             }
         }
         //als je niet bent ingelogged ga terug naar login pagina
-
         else {
             $('#tabmakeklant').hide();
             $('#tabInstelligen').show();
@@ -1243,10 +1621,10 @@ document.addEventListener("deviceready", async function () {
     });
 
 
-    klant=[];
+    klant = [];
 
 
-var aantalklantengevonden;
+    var aantalklantengevonden;
     //wanneer er op de sidenav gedrukt word reset count
     $('.sidenav a').click(function () {
         aantalklantengevonden = 0;
@@ -1254,7 +1632,7 @@ var aantalklantengevonden;
 
     //als er op de knop gedrukt word
     $('#submitbutton2').click(async function () {
-        aantalklantengevonden=0;
+        aantalklantengevonden = 0;
         $('#frametoevoegen').val("").empty();
         $('#username').val("").empty();
         $('#password').val("").empty();
@@ -1263,44 +1641,44 @@ var aantalklantengevonden;
 
         //als je bent ingelogged
         if (ingelogged == 1) {
-            aantallist =[];
+            aantallist = [];
             var div = document.getElementById("map_canvas");
-// Create a Google Maps native view under the map_canvas div.
+            // Create a Google Maps native view under the map_canvas div.
             var map = plugin.google.maps.Map.getMap(div);
             //reset html tekst
             $('#searchtest').html("");
             const klantendatalist = await getklanten();
             // ga kijken welke data er bruikbaar is
             naam = $('#naam').val();
-            if (naam != null){
+            if (naam != null) {
                 bruikbarenaam = capitalizeFirstLetter(naam);
             }
             familie = $('#familienaam').val();
-            if (familie != null){
+            if (familie != null) {
                 bruikbarefamilie = capitalizeFirstLetter(familie);
             }
             klantenid = $('#klantenid').val();
-            if (klantenid != null){
+            if (klantenid != null) {
                 bruikbareklantenid = klantenid;
             }
             land = $('#land').val();
-            if (land != null){
+            if (land != null) {
                 bruikbareland = capitalizeFirstLetter(land);
             }
             postcode = $('#postcode').val();
-            if (postcode != null){
+            if (postcode != null) {
                 bruikbarepostcode = postcode;
             }
             straat = $('#straat').val();
-            if (straat != null){
+            if (straat != null) {
                 bruikbarestraat = capitalizeFirstLetter(straat);
             }
             huisnummer = $('#huisnummer').val();
-            if (huisnummer != null){
+            if (huisnummer != null) {
                 bruikbarehuisnummer = huisnummer;
             }
             gemeente = $('#gemeente').val();
-            if (gemeente!= null){
+            if (gemeente != null) {
                 bruikbaregemeente = capitalizeFirstLetter(gemeente);
             }
 
@@ -1309,7 +1687,7 @@ var aantalklantengevonden;
             var klanten = [];
             //ga kijken welke klanten hier bij kunnen passen
             for (i in klantendatalist) {
-                if ((klantendatalist[i][0].includes(bruikbareklantenid)) && (klantendatalist[i][1].includes(bruikbarenaam)) && (klantendatalist[i][2].includes(bruikbarefamilie))&& (klantendatalist[i][3].includes(bruikbareland))&& (klantendatalist[i][4].includes(bruikbaregemeente))&& (klantendatalist[i][5].includes(bruikbarepostcode))&& (klantendatalist[i][6].includes(bruikbarestraat))&& (klantendatalist[i][7].includes(bruikbarehuisnummer))){
+                if ((klantendatalist[i][0].includes(bruikbareklantenid)) && (klantendatalist[i][1].includes(bruikbarenaam)) && (klantendatalist[i][2].includes(bruikbarefamilie)) && (klantendatalist[i][3].includes(bruikbareland)) && (klantendatalist[i][4].includes(bruikbaregemeente)) && (klantendatalist[i][5].includes(bruikbarepostcode)) && (klantendatalist[i][6].includes(bruikbarestraat)) && (klantendatalist[i][7].includes(bruikbarehuisnummer))) {
                     // console.log(klantendatalist[i]);
                     klanten.push(klantendatalist[i]);
                     klant.push(klantendatalist[i]);
@@ -1320,25 +1698,29 @@ var aantalklantengevonden;
 
 
             //voor elke klant dat overeen komt met de inputfield gegevens doe getal +1
-            for (i in klanten){
+            for (i in klanten) {
                 aantalklantengevonden++;
             }
             //als het getal 0 is en er dus geen klanten zijn, geef een melding dat er geen klanten zijn gevonden met deze input gegevens
 
-            if (aantalklantengevonden==0){
-                M.toast({html: 'Geen klanten gevonden', displayLength: 3000, classes: 'red rounded center'});
+            if (aantalklantengevonden == 0) {
+                M.toast({
+                    html: 'Geen klanten gevonden',
+                    displayLength: 3000,
+                    classes: 'red rounded center'
+                });
             }
             //als het aantal groter is dan 1, dan zijn er meerdere gevonden, hierbij gaan we een lijst aanvullen met alle mogelijke klanten en een knop om deze klant zijn gegevens te zien
-            else if (aantalklantengevonden>1){
+            else if (aantalklantengevonden > 1) {
                 var stringklanten = "";
                 var stringklanten2 = "";
-                var count=0;
-                var items= "";
-                for (i in klanten){
+                var count = 0;
+                var items = "";
+                for (i in klanten) {
                     count++;
-                    stringklanten = stringklanten+" "+klanten[i][0] +". "+ klanten[i][1] + " "+ klanten[i][2];
-                    stringklanten2 = stringklanten2+" "+ klanten[i][0] +". "+ klanten[i][1] + " "+ klanten[i][2]+" "+ klanten[i][4]+" "+ klanten[i][5]+" "+ klanten[i][6]+" "+ klanten[i][7]+" "+'<br>';
-                    var stringklanten3 = klanten[i][0] +". "+ klanten[i][1] + " "+ klanten[i][2]+" "+ klanten[i][4]+" "+ klanten[i][5]+" "+ klanten[i][6]+" "+ klanten[i][7];
+                    stringklanten = stringklanten + " " + klanten[i][0] + ". " + klanten[i][1] + " " + klanten[i][2];
+                    stringklanten2 = stringklanten2 + " " + klanten[i][0] + ". " + klanten[i][1] + " " + klanten[i][2] + " " + klanten[i][4] + " " + klanten[i][5] + " " + klanten[i][6] + " " + klanten[i][7] + " " + '<br>';
+                    var stringklanten3 = klanten[i][0] + ". " + klanten[i][1] + " " + klanten[i][2] + " " + klanten[i][4] + " " + klanten[i][5] + " " + klanten[i][6] + " " + klanten[i][7];
 
                     let item = `<div class="border row">
                             <div class="col s9">
@@ -1348,18 +1730,18 @@ var aantalklantengevonden;
                                 <i class="material-icons circle blue gotoklant2" data-task="${klanten[i][0]}">arrow_forward</i>
                             </div>			            	
 			        </div>`;
-                    items=items+item;
+                    items = items + item;
                 }
 
-                let items2=`<div class="margintop">${items}</div>`;
+                let items2 = `<div class="margintop">${items}</div>`;
 
 
 
                 $('#searchtest').html(items2);
                 //als er geklickt word op de specifieke klant, ga je door dezelfde code dan er er maar 1 klant gevonden zou zijn
-                $('.gotoklant').on('click', '.gotoklant2', cancelDuplicates( async function(event) {
-                    items2="";
-                    aantallist=[];
+                $('.gotoklant').on('click', '.gotoklant2', cancelDuplicates(async function (event) {
+                    items2 = "";
+                    aantallist = [];
                     $('#searchtest').html(items2);
                     // console.log("geklikt");
                     var id = $(this).data('task');
@@ -1367,7 +1749,7 @@ var aantalklantengevonden;
                     // console.log(id);
                     data = await getklantenonid2(idint);
                     // console.log(data);
-                    klanten=data;
+                    klanten = data;
                     //    hier
                     $('#tabBoven').show();
                     $('#tabBeneden').hide();
@@ -1396,7 +1778,7 @@ var aantalklantengevonden;
                         gsmnummer = klanten[i][9];
                         aantallist = dataframeid.split(".");
                     }
-                    items2="";
+                    items2 = "";
                     $('#searchtest').html(items2);
 
                     $('#naam').val("").empty();
@@ -1412,13 +1794,13 @@ var aantalklantengevonden;
                     for (i in aantallist) {
                         aantal++;
                     }
-                    if ((dataframeid == "null")||(dataframeid =="")) {
-                        aantal=0;
+                    if ((dataframeid == "null") || (dataframeid == "")) {
+                        aantal = 0;
                     }
 
 
-                    const adres = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente +",<br>" + dataland;
-                    const adres2 = datastraat + "," + datahuisnummer + "," + datapostcode + "," + datagemeente+","+dataland;
+                    const adres = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ",<br>" + dataland;
+                    const adres2 = datastraat + "," + datahuisnummer + "," + datapostcode + "," + datagemeente + "," + dataland;
 
                     //hide alle frames
                     $('#0frames').hide();
@@ -1490,7 +1872,7 @@ var aantalklantengevonden;
                     if (dataframeid == "undefined") {
                         dataframes = "0";
                     }
-                    codegsm =landtocodegsm(dataland);
+                    codegsm = landtocodegsm(dataland);
                     $('#dataklantenid').html(dataklantid);
                     $('#dataklantennaam').html(datanaam);
                     $('#dataklantenfamilie').html(datafamilienaam);
@@ -1519,25 +1901,25 @@ var aantalklantengevonden;
                     klantframesbutton.classList.add("buttonclass");
 
                     //als je op de editadres button drukt
-                    $('#editadres').click( async function (event) {
+                    $('#editadres').click(async function (event) {
                         //zorgt ervoor dat de notificatie niet meerdere malen getoond word
                         event.stopImmediatePropagation();
                         //aanmaken van volgende buttons
-                        let buttons = ['Change','Cancel'];
+                        let buttons = ['Change', 'Cancel'];
                         //notificitation aanmaken
                         navigator.notification.prompt("Weet je zeker dat je het adres wilt veranderen?", onPrompt, `${adres2}`, buttons);
                         //als de notificatie goed is ingevuld
-                        async function onPrompt(buttonIndex){
+                        async function onPrompt(buttonIndex) {
                             //zorgt ervoor dat er niet meerdere malen een notificatie getoond word
                             event.stopImmediatePropagation();
                             //als er op change gedrukt word
-                            if (buttonIndex.buttonIndex == 1){
+                            if (buttonIndex.buttonIndex == 1) {
                                 let inputtest = buttonIndex.input1.split(".");
-                                codegsm =landtocodegsm(inputtest[4]);
+                                codegsm = landtocodegsm(inputtest[4]);
                                 // console.log(klanten[0][10]);
-                                await editklantadres(klanten[0][0],inputtest[0],inputtest[1],inputtest[2],inputtest[3],inputtest[4]);
+                                await editklantadres(klanten[0][0], inputtest[0], inputtest[1], inputtest[2], inputtest[3], inputtest[4]);
 
-                                const adres = inputtest[0] + " " + inputtest[1] + ",<br>" + inputtest[2] + " " + inputtest[3] +",<br>" + inputtest[4];
+                                const adres = inputtest[0] + " " + inputtest[1] + ",<br>" + inputtest[2] + " " + inputtest[3] + ",<br>" + inputtest[4];
                                 $('#dataklantenadres').html(`${adres}`);
                             }
 
@@ -1545,33 +1927,203 @@ var aantalklantengevonden;
                         // console.log("er is geklikt");
                     });
 
-                    //als er op edit gsm gedrukt word
-                    $('#editgsm').click( async function (event) {
+                    //alls je de straat alleen wilt aanpassen
+                    $('#editstraat').click(async function (event) {
+                        console.log("heb ik geklikt op de knop");
                         //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
                         event.stopImmediatePropagation();
                         //aanmaken van buttons
-                        let buttons = ['Change','Cancel'];
+                        let buttons = ['Change', 'Cancel'];
                         //aanmaken van notificatie
-                        navigator.notification.prompt("Weet je zeker dat je de gsm-nummer wilt veranderen?", onPrompt, `${gsmnummer}`, buttons);
+                        navigator.notification.prompt("Weet je zeker dat je de straatnaam wilt veranderen?", onPrompt, `${datastraat}`, buttons);
                         //als de notficatie succesvol is ingevult
-                        async function onPrompt(buttonIndex){
+                        async function onPrompt(buttonIndex) {
                             //zorgt ervoor dat de notificatie niet meerdere keren getoond word
                             event.stopImmediatePropagation();
                             //als er gedrukt word op change
-                            if(buttonIndex.buttonIndex == 1){
+                            if (buttonIndex.buttonIndex == 1) {
+                                let inputtest = buttonIndex.input1;
+                                if ((inputtest != null) && (inputtest != undefined)) {
+                                    newstraat = inputtest;
+                                    newstraat2 = capitalizeFirstLetter(newstraat);
+                                    datastraat = newstraat2;
+                                    await editklantstraat(`${dataklantid}`, newstraat2);
+                                    const adres2 = newstraat2 + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ",<br>" + dataland;
+                                    $('#dataklantenadres').html(`${adres2}`);
+                                }
+                            }
+                        }
+                    });
+
+                    //als je de huisnummer alleen wilt aanpassen
+                    $('#edithuisnummer').click(async function (event) {
+                        console.log("heb ik geklikt op de knop");
+                        //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                        event.stopImmediatePropagation();
+                        //aanmaken van buttons
+                        let buttons = ['Change', 'Cancel'];
+                        //aanmaken van notificatie
+                        navigator.notification.prompt("Weet je zeker dat je het huisnummer wilt veranderen?", onPrompt, `${datahuisnummer}`, buttons);
+                        //als de notficatie succesvol is ingevult
+                        async function onPrompt(buttonIndex) {
+                            //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                            event.stopImmediatePropagation();
+                            //als er gedrukt word op change
+                            if (buttonIndex.buttonIndex == 1) {
+                                let inputtest = buttonIndex.input1;
+                                if ((inputtest != null) && (inputtest != undefined)) {
+                                    newhuisnummer = inputtest;
+                                    newhuisnummer2 = capitalizeFirstLetter(newhuisnummer);
+
+                                    await editklanthuisnummer(`${dataklantid}`, newhuisnummer2);
+                                    const adres2 = datastraat + " " + newhuisnummer2 + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                    $('#dataklantenadres').html(adres2);
+                                }
+                            }
+                        }
+                    });
+
+                    //als je de huisnummer alleen wilt aanpassen
+                    $('#editpostcode').click(async function (event) {
+                        console.log("heb ik geklikt op de knop");
+                        //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                        event.stopImmediatePropagation();
+                        //aanmaken van buttons
+                        let buttons = ['Change', 'Cancel'];
+                        //aanmaken van notificatie
+                        navigator.notification.prompt("Weet je zeker dat je de postcode wilt veranderen?", onPrompt, `${datapostcode}`, buttons);
+                        //als de notficatie succesvol is ingevult
+                        async function onPrompt(buttonIndex) {
+                            //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                            event.stopImmediatePropagation();
+                            //als er gedrukt word op change
+                            if (buttonIndex.buttonIndex == 1) {
+                                let inputtest = buttonIndex.input1;
+                                if ((inputtest != null) && (inputtest != undefined)) {
+                                    newpostcode = inputtest;
+                                    newpostcode2 = capitalizeFirstLetter(newpostcode);
+                                    datapostcode = newpostcode2;
+                                    const response = await fetch('http://opzoeken-postcode.be/' + `${datapostcode}` + '.json');
+                                    // const response = await fetch('http://opzoeken-postcode.be/3390.json');
+                                    // const response = await fetch("http://opzoeken-postcode.be/"+`${postcode2}`+".json");
+                                    // console.log(response);
+                                    let data = await response.json();
+                                    if (data[0] == undefined) {
+                                        M.toast({
+                                            html: `Gelieve een andere postcode in te geven`,
+                                            displayLength: 3000,
+                                            classes: 'red rounded center'
+                                        });
+                                    }
+                                    datagemeente = data[0].Postcode.naam_hoofdgemeente;
+
+                                    await editklantgemeente(`${dataklantid}`, datagemeente);
+                                    await editklantpostcode(`${dataklantid}`, newpostcode2);
+                                    const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                    $('#dataklantenadres').html(adres2);
+
+                                }
+                            }
+                        }
+                    });
+
+                    //als je de gemeente alleen wilt aanpassen
+                    $('#editgemeente').click(async function (event) {
+                        console.log("heb ik geklikt op de knop");
+                        //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                        event.stopImmediatePropagation();
+                        //aanmaken van buttons
+                        let buttons = ['Change', 'Cancel'];
+                        //aanmaken van notificatie
+                        navigator.notification.prompt("Weet je zeker dat je de gemeente wilt veranderen?", onPrompt, `${datagemeente}`, buttons);
+                        //als de notficatie succesvol is ingevult
+                        async function onPrompt(buttonIndex) {
+                            //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                            event.stopImmediatePropagation();
+                            //als er gedrukt word op change
+                            if (buttonIndex.buttonIndex == 1) {
+                                let inputtest = buttonIndex.input1;
+                                if ((inputtest != null) && (inputtest != undefined)) {
+                                    newgemeente = inputtest;
+                                    newgemeente2 = capitalizeFirstLetter(newgemeente);
+                                    datagemeente = newgemeente2;
+                                    const response = await fetch('http://opzoeken-postcode.be/' + `${datagemeente}` + '.json');
+                                    let data = await response.json();
+                                    if (data[0] == undefined) {
+                                        M.toast({
+                                            html: `Gelieve een andere gemeente in te geven`,
+                                            displayLength: 3000,
+                                            classes: 'red rounded center'
+                                        });
+                                    }
+                                    datapostcode = data[0].Postcode.postcode_hoofdgemeente;
+
+                                    await editklantpostcode(`${dataklantid}`, datapostcode);
+                                    await editklantgemeente(`${dataklantid}`, newgemeente2);
+                                    const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                    $('#dataklantenadres').html(adres2);
+                                }
+                            }
+                        }
+                    });
+
+                    //als je de land alleen wilt aanpassen
+                    $('#editland').click(async function (event) {
+                        console.log("heb ik geklikt op de knop");
+                        //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                        event.stopImmediatePropagation();
+                        //aanmaken van buttons
+                        let buttons = ['Change', 'Cancel'];
+                        //aanmaken van notificatie
+                        navigator.notification.prompt("Weet je zeker dat je het land wilt veranderen?", onPrompt, `${dataland}`, buttons);
+                        //als de notficatie succesvol is ingevult
+                        async function onPrompt(buttonIndex) {
+                            //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                            event.stopImmediatePropagation();
+                            //als er gedrukt word op change
+                            if (buttonIndex.buttonIndex == 1) {
+                                let inputtest = buttonIndex.input1;
+                                if ((inputtest != null) && (inputtest != undefined)) {
+                                    newland = inputtest;
+                                    newland2 = capitalizeFirstLetter(newland);
+                                    dataland = newland2;
+                                    await editklantland(`${dataklantid}`, newland2);
+                                    const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                    $('#dataklantenadres').html(adres2);
+                                    $('#dataklantenland').html(newland2);
+                                }
+                            }
+                        }
+                    });
+
+
+                    //als er op edit gsm gedrukt word
+                    $('#editgsm').click(async function (event) {
+                        //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                        event.stopImmediatePropagation();
+                        //aanmaken van buttons
+                        let buttons = ['Change', 'Cancel'];
+                        //aanmaken van notificatie
+                        navigator.notification.prompt("Weet je zeker dat je de gsm-nummer wilt veranderen?", onPrompt, `${gsmnummer}`, buttons);
+                        //als de notficatie succesvol is ingevult
+                        async function onPrompt(buttonIndex) {
+                            //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                            event.stopImmediatePropagation();
+                            //als er gedrukt word op change
+                            if (buttonIndex.buttonIndex == 1) {
                                 let inputtest = buttonIndex.input1;
                                 // als er een + in de gsmnummer zit doe je niks
-                                if (inputtest.includes("+")){
-                                    gsmnummer=inputtest;
+                                if (inputtest.includes("+")) {
+                                    gsmnummer = inputtest;
                                 }
                                 //anders ga je op basis van het land de gsm nummer internationaal maken
-                                else{
-                                    gsmnummer=codegsm + inputtest.substring(1);
+                                else {
+                                    gsmnummer = codegsm + inputtest.substring(1);
                                     // console.log(gsmnummer);
                                 }
                                 // console.log("test1" + typeof (`${dataklantid}`));
                                 // console.log(`${dataklantid}`);
-                                await editklantgsm(`${dataklantid}`,gsmnummer);
+                                await editklantgsm(`${dataklantid}`, gsmnummer);
 
                                 $('#dataklantengsm').html(gsmnummer);
                             }
@@ -1585,8 +2137,8 @@ var aantalklantengevonden;
 
                     $('#submitbuttoneditframes').click(async function () {
 
-                        var error=0;
-                        var errorlist= [];
+                        var error = 0;
+                        var errorlist = [];
                         var errorklant = [];
                         var errortekst = "";
                         var klanten = await getklanten();
@@ -1594,7 +2146,7 @@ var aantalklantengevonden;
                         var frameiddmwt = $('#frametoevoegen').val();
                         //gewilde frames zijn gesplisd opbasis van een .
                         gewildeframes = frameiddmwt.split(".");
-                        for (i in klanten){
+                        for (i in klanten) {
                             for (k in gewildeframes) {
                                 if (klanten[i][8] == gewildeframes[k]) {
                                     error = 1;
@@ -1610,27 +2162,35 @@ var aantalklantengevonden;
                         //als de user een frameid wilt toevoegen aan een klant en deze frameid heeft iemand anders al, toon een notification en toon de klanten met deze frameid's
                         if (error == 1) {
                             $('#errors').html(errortekst);
-                            M.toast({html: `Niet mogelijk om de frameid('s) te veranderen!`, displayLength: 3000, classes: 'red rounded center'});
+                            M.toast({
+                                html: `Niet mogelijk om de frameid('s) te veranderen!`,
+                                displayLength: 3000,
+                                classes: 'red rounded center'
+                            });
                         }
                         // pas de frames aan
-                        else{
+                        else {
                             //maak het field leef
                             $('#frametoevoegen').empty();
                             //maakt de errors html leeg
                             $('#errors').html(" ");
                             await framestoevoegen(dataklantid, frameiddmwt);
                             //notification dat de frames zijn aangepast
-                            M.toast({html: 'Frames zijn aangepast!', displayLength: 3000, classes: 'green rounded center'});
+                            M.toast({
+                                html: 'Frames zijn aangepast!',
+                                displayLength: 3000,
+                                classes: 'green rounded center'
+                            });
 
                             aantallist = frameiddmwt.split(".");
 
                             //doet terug dezelfde stappen als hiervoor om de frames te laten tonen op de pagina. Maar dan wel geupdate
-                            aantal=0;
-                            for ( i in aantallist) {
+                            aantal = 0;
+                            for (i in aantallist) {
                                 aantal++;
                             }
-                            if ((frameiddmwt == "null")||(frameiddmwt =="")) {
-                                aantal=0;
+                            if ((frameiddmwt == "null") || (frameiddmwt == "")) {
+                                aantal = 0;
                             }
                             $('#dataklantenframes').html(aantal);
 
@@ -1721,18 +2281,22 @@ var aantalklantengevonden;
 
                     //wanneer er op de reminder versturen gedrukt word
                     $('#reminder').click(async function () {
-                        const accountSid = "ACe9b7173be0c8baeee3c96e0bbc5ae302";
-                        const authToken = "7fd916239574d31f7874462310ed9c9c";
+                        const accountSid = "$accountsid";
+                        const authToken = "$authtoken";
                         const client = require('twilio')(accountSid, authToken);
                         //maak een berichti aan met de tekst, telefoonnummer van twilio en to een gsmnummer, in dit geval de telefoonnummer van de klant
                         client.messages
                             .create({
                                 body: 'Dit is een geautomatiseerd bericht. Gelieve je A-frames van de tegels terug te brengen. Mvg, Coeck NV',
-                                from: '+12056353774',
+                                from: '$gsmnummer',
                                 to: gsmnummer
                             })
                             //toon een message dat deze verstuurd is.
-                            .then(M.toast({html: 'Reminder is verzonden!', displayLength: 3000, classes: 'green rounded center'}));
+                            .then(M.toast({
+                                html: 'Reminder is verzonden!',
+                                displayLength: 3000,
+                                classes: 'green rounded center'
+                            }));
                     });
 
                 }));
@@ -1741,7 +2305,7 @@ var aantalklantengevonden;
 
             //anders is er maar 1 klant gevonden
             else {
-                aantallist=[];
+                aantallist = [];
                 console.log("ik zit in klanten gevonden 1");
                 $('#tabBoven').show();
                 $('#tabBeneden').hide();
@@ -1772,12 +2336,12 @@ var aantalklantengevonden;
                     aantal++;
                 }
                 //als de input null of niks is dan aantal = 0
-                if ((dataframeid == "null")||(dataframeid =="")) {
-                    aantal=0;
+                if ((dataframeid == "null") || (dataframeid == "")) {
+                    aantal = 0;
                 }
                 //maken van strings om te tonen in .html
-                const adres = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente +",<br>" + dataland;
-                const adres2 = datastraat + "," + datahuisnummer + "," + datapostcode + "," + datagemeente+","+dataland;
+                const adres = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ",<br>" + dataland;
+                const adres2 = datastraat + "," + datahuisnummer + "," + datapostcode + "," + datagemeente + "," + dataland;
                 //hide alle frames
                 $('#0frames').hide();
                 $('#1frames').hide();
@@ -1849,7 +2413,7 @@ var aantalklantengevonden;
                     dataframes = "0";
                 }
                 //zet land to internation code
-                codegsm =landtocodegsm(dataland);
+                codegsm = landtocodegsm(dataland);
                 //toon data op de html pagina
                 $('#dataklantenid').html(dataklantid);
                 $('#dataklantennaam').html(datanaam);
@@ -1875,52 +2439,224 @@ var aantalklantengevonden;
 
                 klantframesbutton.classList.add("buttonclass");
                 //als er gedrukt word op edit adres
-                $('#editadres').click( async function (event) {
+                $('#editadres').click(async function (event) {
                     //zorgt ervoor dat de notificatie niet meerdere keren getoond worden
                     event.stopImmediatePropagation();
                     //maken van buttons
-                    let buttons = ['Change','Cancel'];
+                    let buttons = ['Change', 'Cancel'];
                     //maken van een notificatie
                     navigator.notification.prompt("Weet je zeker dat je het adres wilt veranderen?", onPrompt, `${adres2}`, buttons);
                     //als de notificatie goed is ingevuld
-                    async function onPrompt(buttonIndex){
+                    async function onPrompt(buttonIndex) {
                         //zorgt ervoor dat de notificatie niet meerdere keren getoond worden
                         event.stopImmediatePropagation();
                         //als er op de change button gedrukt is
-                        if (buttonIndex.buttonIndex == 1){
+                        if (buttonIndex.buttonIndex == 1) {
                             let inputtest = buttonIndex.input1.split(".");
                             // internationale code voor gsm opvragen met het ingevulde land
-                            codegsm =landtocodegsm(inputtest[4]);
-                            await editklantadres(klanten[0][0],inputtest[0],inputtest[1],inputtest[2],inputtest[3],inputtest[4]);
+                            codegsm = landtocodegsm(inputtest[4]);
+                            await editklantadres(klanten[0][0], inputtest[0], inputtest[1], inputtest[2], inputtest[3], inputtest[4]);
 
-                            const adres = inputtest[0] + " " + inputtest[1] + ",<br>" + inputtest[2] + " " + inputtest[3] +",<br>" + inputtest[4];
+                            const adres = inputtest[0] + " " + inputtest[1] + ",<br>" + inputtest[2] + " " + inputtest[3] + ",<br>" + inputtest[4];
                             $('#dataklantenadres').html(`${adres}`);
+                        }
+                    }
+                });
+                //alls je de straat alleen wilt aanpassen
+                $('#editstraat').click(async function (event) {
+                    console.log("heb ik geklikt op de knop");
+                    //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                    event.stopImmediatePropagation();
+                    //aanmaken van buttons
+                    let buttons = ['Change', 'Cancel'];
+                    //aanmaken van notificatie
+                    navigator.notification.prompt("Weet je zeker dat je de straatnaam wilt veranderen?", onPrompt, `${datastraat}`, buttons);
+                    //als de notficatie succesvol is ingevult
+                    async function onPrompt(buttonIndex) {
+                        //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                        event.stopImmediatePropagation();
+                        //als er gedrukt word op change
+                        if (buttonIndex.buttonIndex == 1) {
+                            let inputtest = buttonIndex.input1;
+                            if ((inputtest != null) && (inputtest != undefined)) {
+                                newstraat = inputtest;
+                                newstraat2 = capitalizeFirstLetter(newstraat);
+                                datastraat = newstraat2;
+                                await editklantstraat(`${dataklantid}`, newstraat2);
+                                const adres2 = newstraat2 + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ",<br>" + dataland;
+                                $('#dataklantenadres').html(`${adres2}`);
+                            }
+                        }
+                    }
+                });
+
+                //als je de huisnummer alleen wilt aanpassen
+                $('#edithuisnummer').click(async function (event) {
+                    console.log("heb ik geklikt op de knop");
+                    //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                    event.stopImmediatePropagation();
+                    //aanmaken van buttons
+                    let buttons = ['Change', 'Cancel'];
+                    //aanmaken van notificatie
+                    navigator.notification.prompt("Weet je zeker dat je het huisnummer wilt veranderen?", onPrompt, `${datahuisnummer}`, buttons);
+                    //als de notficatie succesvol is ingevult
+                    async function onPrompt(buttonIndex) {
+                        //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                        event.stopImmediatePropagation();
+                        //als er gedrukt word op change
+                        if (buttonIndex.buttonIndex == 1) {
+                            let inputtest = buttonIndex.input1;
+                            if ((inputtest != null) && (inputtest != undefined)) {
+                                newhuisnummer = inputtest;
+                                newhuisnummer2 = capitalizeFirstLetter(newhuisnummer);
+
+                                await editklanthuisnummer(`${dataklantid}`, newhuisnummer2);
+                                const adres2 = datastraat + " " + newhuisnummer2 + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                $('#dataklantenadres').html(adres2);
+                            }
+                        }
+                    }
+                });
+
+                //als je de huisnummer alleen wilt aanpassen
+                $('#editpostcode').click(async function (event) {
+
+                    console.log("heb ik geklikt op de knop");
+                    //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                    event.stopImmediatePropagation();
+                    //aanmaken van buttons
+                    let buttons = ['Change', 'Cancel'];
+                    //aanmaken van notificatie
+                    navigator.notification.prompt("Weet je zeker dat je de postcode wilt veranderen?", onPrompt, `${datapostcode}`, buttons);
+                    //als de notficatie succesvol is ingevult
+                    async function onPrompt(buttonIndex) {
+                        //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                        event.stopImmediatePropagation();
+                        //als er gedrukt word op change
+                        if (buttonIndex.buttonIndex == 1) {
+                            let inputtest = buttonIndex.input1;
+                            if ((inputtest != null) && (inputtest != undefined)) {
+                                newpostcode = inputtest;
+                                newpostcode2 = capitalizeFirstLetter(newpostcode);
+                                datapostcode = newpostcode2;
+
+                                const response = await fetch('http://opzoeken-postcode.be/' + `${datapostcode}` + '.json');
+                                // const response = await fetch("http://opzoeken-postcode.be/"+`${postcode2}`+".json");
+                                // console.log(response);
+                                let data = await response.json();
+                                if (data[0] == undefined) {
+                                    M.toast({
+                                        html: `Gelieve een andere postcode in te geven`,
+                                        displayLength: 3000,
+                                        classes: 'red rounded center'
+                                    });
+                                }
+                                datagemeente = data[0].Postcode.naam_hoofdgemeente;
+
+                                await editklantgemeente(`${dataklantid}`, datagemeente);
+                                await editklantpostcode(`${dataklantid}`, newpostcode2);
+                                const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                $('#dataklantenadres').html(adres2);
+
+                            }
+                        }
+                    }
+                });
+
+                //als je de gemeente alleen wilt aanpassen
+                $('#editgemeente').click(async function (event) {
+                    console.log("heb ik geklikt op de knop");
+                    //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                    event.stopImmediatePropagation();
+                    //aanmaken van buttons
+                    let buttons = ['Change', 'Cancel'];
+                    //aanmaken van notificatie
+                    navigator.notification.prompt("Weet je zeker dat je de gemeente wilt veranderen?", onPrompt, `${datagemeente}`, buttons);
+                    //als de notficatie succesvol is ingevult
+                    async function onPrompt(buttonIndex) {
+                        //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                        event.stopImmediatePropagation();
+                        //als er gedrukt word op change
+                        if (buttonIndex.buttonIndex == 1) {
+                            let inputtest = buttonIndex.input1;
+                            if ((inputtest != null) && (inputtest != undefined)) {
+                                newgemeente = inputtest;
+                                newgemeente2 = capitalizeFirstLetter(newgemeente);
+                                datagemeente = newgemeente2;
+
+                                const response = await fetch('http://opzoeken-postcode.be/' + `${datagemeente}` + '.json');
+                                // const response = await fetch('http://opzoeken-postcode.be/3390.json');
+                                // const response = await fetch("http://opzoeken-postcode.be/"+`${postcode2}`+".json");
+                                // console.log(response);
+                                let data = await response.json();
+                                if (data[0] == undefined) {
+                                    M.toast({
+                                        html: `Gelieve een andere gemeente in te geven`,
+                                        displayLength: 3000,
+                                        classes: 'red rounded center'
+                                    });
+                                }
+                                datapostcode = data[0].Postcode.postcode_hoofdgemeente;
+
+                                await editklantpostcode(`${dataklantid}`, datapostcode);
+                                await editklantgemeente(`${dataklantid}`, newgemeente2);
+                                const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                $('#dataklantenadres').html(adres2);
+                            }
+                        }
+                    }
+                });
+
+                //als je de land alleen wilt aanpassen
+                $('#editland').click(async function (event) {
+                    console.log("heb ik geklikt op de knop");
+                    //zorgt ervoor dat je de notificatie niet meerdere keren krijgt
+                    event.stopImmediatePropagation();
+                    //aanmaken van buttons
+                    let buttons = ['Change', 'Cancel'];
+                    //aanmaken van notificatie
+                    navigator.notification.prompt("Weet je zeker dat je het land wilt veranderen?", onPrompt, `${dataland}`, buttons);
+                    //als de notficatie succesvol is ingevult
+                    async function onPrompt(buttonIndex) {
+                        //zorgt ervoor dat de notificatie niet meerdere keren getoond word
+                        event.stopImmediatePropagation();
+                        //als er gedrukt word op change
+                        if (buttonIndex.buttonIndex == 1) {
+                            let inputtest = buttonIndex.input1;
+                            if ((inputtest != null) && (inputtest != undefined)) {
+                                newland = inputtest;
+                                newland2 = capitalizeFirstLetter(newland);
+                                dataland = newland2;
+                                await editklantland(`${dataklantid}`, newland2);
+                                const adres2 = datastraat + " " + datahuisnummer + ",<br>" + datapostcode + " " + datagemeente + ", <br>" + dataland;
+                                $('#dataklantenadres').html(adres2);
+                                $('#dataklantenland').html(newland2);
+                            }
                         }
                     }
                 });
 
                 //als er op editgsm gedrukt word
-                $('#editgsm').click( async function (event) {
+                $('#editgsm').click(async function (event) {
                     //zorgt ervoor dat de notificatie niet meerdere keren getoond word
                     event.stopImmediatePropagation();
                     //maak 2 buttons aan
-                    let buttons = ['Change','Cancel'];
+                    let buttons = ['Change', 'Cancel'];
                     //maak notificatie aan
                     navigator.notification.prompt("Weet je zeker dat je de gsm-nummer wilt veranderen?", onPrompt, `${gsmnummer}`, buttons);
                     //als de notificatie goed is ingevuld
-                    async function onPrompt(buttonIndex){
+                    async function onPrompt(buttonIndex) {
                         //zorgt ervoor dat de notificatie niet meerdere keren getoont kan worden
                         event.stopImmediatePropagation();
                         //als er op change gedrukt word verander het gsm nummer
-                        if(buttonIndex.buttonIndex == 1){
+                        if (buttonIndex.buttonIndex == 1) {
                             let inputtest = buttonIndex.input1;
-                            if (inputtest.includes("+")){
-                                gsmnummer=inputtest;
+                            if (inputtest.includes("+")) {
+                                gsmnummer = inputtest;
+                            } else {
+                                gsmnummer = codegsm + inputtest.substring(1);
                             }
-                            else{
-                                gsmnummer=codegsm + inputtest.substring(1);
-                            }
-                            await editklantgsm(`${dataklantid}`,gsmnummer);
+                            await editklantgsm(`${dataklantid}`, gsmnummer);
                             $('#dataklantengsm').html(gsmnummer);
                         }
 
@@ -1928,8 +2664,8 @@ var aantalklantengevonden;
                 });
                 //als er op editframes gedrukt word
                 $('#submitbuttoneditframes').click(async function () {
-                    var error=0;
-                    var errorlist= [];
+                    var error = 0;
+                    var errorlist = [];
                     var errorklant = [];
                     var errortekst = "";
                     var klanten = await getklanten();
@@ -1938,7 +2674,7 @@ var aantalklantengevonden;
                     //split de data op .
                     gewildeframes = frameiddmwt.split(".");
                     //voor elke klant en voor elke gewilde frameid
-                    for (i in klanten){
+                    for (i in klanten) {
                         for (k in gewildeframes) {
                             //als de klant het gewilde frame heeft zet error en push de klant in een list
                             if (klanten[i][8] == gewildeframes[k]) {
@@ -1953,25 +2689,33 @@ var aantalklantengevonden;
                     //als iemand anders al het frameid heeft, toon een bericht, en toon de klant in html text
                     if (error == 1) {
                         $('#errors').html(errortekst);
-                        M.toast({html: `Niet mogelijk om de frameid('s) te veranderen!`, displayLength: 3000, classes: 'red rounded center'});
+                        M.toast({
+                            html: `Niet mogelijk om de frameid('s) te veranderen!`,
+                            displayLength: 3000,
+                            classes: 'red rounded center'
+                        });
                     }
                     //anders de frames van de klant aan
-                    else{
+                    else {
                         //maakt input field leeg
                         $('#frametoevoegen').empty();
                         $('#errors').html(" ");
                         //veranderd de frames
                         await framestoevoegen(dataklantid, frameiddmwt);
                         //message
-                        M.toast({html: 'Frames zijn aangepast!', displayLength: 3000, classes: 'green rounded center'});
+                        M.toast({
+                            html: 'Frames zijn aangepast!',
+                            displayLength: 3000,
+                            classes: 'green rounded center'
+                        });
                         aantallist = frameiddmwt.split(".");
                         //repeated code om de pagina op een snelle manier te refreshen
-                        aantal=0;
-                        for ( i in aantallist) {
+                        aantal = 0;
+                        for (i in aantallist) {
                             aantal++;
                         }
-                        if ((frameiddmwt == "null")||(frameiddmwt =="")) {
-                            aantal=0;
+                        if ((frameiddmwt == "null") || (frameiddmwt == "")) {
+                            aantal = 0;
                         }
                         $('#dataklantenframes').html(aantal);
 
@@ -2059,18 +2803,22 @@ var aantalklantengevonden;
                 });
                 //wanneer er op de reminder knop gedrukt word
                 $('#reminder').click(async function () {
-                    const accountSid = "ACe9b7173be0c8baeee3c96e0bbc5ae302";
-                    const authToken = "7fd916239574d31f7874462310ed9c9c";
+                    const accountSid = "$accountsid";
+                    const authToken = "$authtoken";
                     const client = require('twilio')(accountSid, authToken);
 
                     //maak een bericht aan met de volgende tekst, van het twilio nummer, naar de klant zijn gsm nummer, daarna toon een notificatie
                     client.messages
                         .create({
                             body: 'Dit is een geautomatiseerd bericht. Gelieve je A-frames van de tegels terug te brengen. Mvg, Coeck NV',
-                            from: '+12056353774',
+                            from: '$gsmnummer',
                             to: gsmnummer
                         })
-                        .then(M.toast({html: 'Reminder is verzonden!', displayLength: 3000, classes: 'green rounded center'}));
+                        .then(M.toast({
+                            html: 'Reminder is verzonden!',
+                            displayLength: 3000,
+                            classes: 'green rounded center'
+                        }));
                 });
 
             }
@@ -2079,7 +2827,7 @@ var aantalklantengevonden;
             klantframesbutton.addEventListener("click", async function () {
                 $('#tabTutorial').show();
                 $('#tabBoven').hide();
-                var counterk=0;
+                var counterk = 0;
                 //voor elke frame dat getoond moet worden getl + 1
                 for (i in aantallist) {
                     counterk++;
@@ -2092,18 +2840,23 @@ var aantalklantengevonden;
                 //als het getal groter is dan 1 toon de frames op een map gecentreerd op belgië anders neem je de camera coordianten van de frames zelf en zoom je een klein beetje uit
                 for (i in aantallist) {
                     dataframe = await getdataonframeid(aantallist[i]);
-                    if (counterk>1) {
+                    if (counterk > 1) {
                         map.animateCamera({
-                            target: {lat: 50.64022, lng: 4.66667},
+                            target: {
+                                lat: 50.64022,
+                                lng: 4.66667
+                            },
                             zoom: 7,
                             tilt: 0,
                             bearing: 0,
                             duration: 2500
                         });
-                    }
-                    else {
+                    } else {
                         map.animateCamera({
-                            target: {lat: dataframe[0][2], lng: dataframe[0][3]},
+                            target: {
+                                lat: dataframe[0][2],
+                                lng: dataframe[0][3]
+                            },
                             zoom: 17,
                             tilt: 0,
                             bearing: 0,
@@ -2112,7 +2865,10 @@ var aantalklantengevonden;
                     }
                     //maken van een marker
                     var marker3 = map.addMarker({
-                        position: {lat: dataframe[0][2], lng: dataframe[0][3]},
+                        position: {
+                            lat: dataframe[0][2],
+                            lng: dataframe[0][3]
+                        },
                         title: "Frameid: " + dataframe[0][0],
                         // snippet: database[i][4] + ", " + database[i][5] + ", " + database[i][6] + ", " + database[i][7] + ", " + database[i][8] + ", " + database[i][9] + ", " + database[i][10],
                         snippet: dataframe[0][1] + ", " + dataframe[0][4] + ", " + dataframe[0][5] + ", " + dataframe[0][6] + ", " + dataframe[0][7] + ", " + dataframe[0][8] + ", " + dataframe[0][9] + ", " + dataframe[0][10],
@@ -2130,15 +2886,14 @@ var aantalklantengevonden;
                     allmarkers.push(marker3);
 
 
-                    for ( e in markers3){
+                    for (e in markers3) {
                         markers3[e].showInfoWindow();
                     }
                 }
 
-            },false);
+            }, false);
             body.appendChild(klantframesbutton);
-        }
-        else{
+        } else {
             $('#tabmakeklant').hide();
             $('#tabBeneden').hide();
             $('#tabBoven').hide();
