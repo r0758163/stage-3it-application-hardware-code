@@ -2280,7 +2280,7 @@ document.addEventListener("deviceready", async function () {
                     });
 
                     //wanneer er op de reminder versturen gedrukt word
-                    $('#reminder').click(async function () {
+                    $('#reminder').click(async function () { <
                         const accountSid = "$accountsid";
                         const authToken = "$authtoken";
                         const client = require('twilio')(accountSid, authToken);
@@ -2805,6 +2805,7 @@ document.addEventListener("deviceready", async function () {
                 $('#reminder').click(async function () {
                     const accountSid = "$accountsid";
                     const authToken = "$authtoken";
+
                     const client = require('twilio')(accountSid, authToken);
 
                     //maak een bericht aan met de volgende tekst, van het twilio nummer, naar de klant zijn gsm nummer, daarna toon een notificatie
